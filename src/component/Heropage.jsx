@@ -1,6 +1,6 @@
 import Testimonials from "./Testimonial";
 import WhyChoose from "./WhyChoose";
-import Footer from "./footer";
+import Footer from "./Footer";
 import Navbar from "./Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
