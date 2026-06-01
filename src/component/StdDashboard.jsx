@@ -94,8 +94,6 @@ const StdDashboard = () => {
         options,
       );
       setPdfList(result.data.data);
-
-      console.log(result.data.data);
     } catch (error) {
       toast.error(error.response?.data?.message || "Opps! Server Error...", {
         duration: 3000,
@@ -172,7 +170,6 @@ const StdDashboard = () => {
         options,
       );
       setPaperList(result.data.data);
-      console.log(result.data.data);
     } catch (error) {
       toast.error(error.response?.data?.message || "Opps! Server Error...", {
         duration: 3000,
@@ -228,7 +225,7 @@ const StdDashboard = () => {
 
       setSemesters(result.data.data);
     } catch (error) {
-      console.log(error);
+      toast.error(error.response?.data?.message || "Opps! Server Error...");
     }
   }, []);
 
@@ -900,10 +897,6 @@ const StdDashboard = () => {
 
                 <button
                   onClick={() => {
-                    console.log({
-                      rating,
-                      description,
-                    });
                     sendFeedBack();
                   }}
                   className="

@@ -27,8 +27,6 @@ const MangeFeedback = () => {
         setFeedbackList((prev) => prev.filter((item) => item.id !== id));
       }
     } catch (error) {
-      console.log(error);
-
       toast.error(error.response?.data?.message || "Server Error...");
     }
   };
@@ -52,8 +50,6 @@ const MangeFeedback = () => {
 
       setFeedbackList(getData.data.data || []);
     } catch (error) {
-      console.log(error);
-
       toast.error(error.response?.data?.message || "Opps! Server Error...", {
         duration: 3000,
         position: "top-center",

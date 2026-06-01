@@ -180,8 +180,6 @@ const ManagePdf = () => {
         options,
       );
       setPdfList(result.data.data);
-
-      console.log(result.data.data);
     } catch (error) {
       toast.error(error.response?.data?.message || "Opps! Server Error...", {
         duration: 3000,
@@ -290,11 +288,9 @@ const ManagePdf = () => {
         options,
       );
 
-      console.log(result.data);
-
       setBranches(result.data.data);
     } catch (error) {
-      console.log(error);
+      toast.error(error.response?.data?.message || "Opps! Server Error...");
     }
   };
 
@@ -312,11 +308,9 @@ const ManagePdf = () => {
         options,
       );
 
-      console.log(result.data);
-
       setSemesters(result.data.data);
     } catch (error) {
-      console.log(error);
+      toast.error(error.response?.data?.message || "Opps! Server Error...");
     }
   };
   useEffect(() => {

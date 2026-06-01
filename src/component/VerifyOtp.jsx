@@ -1,32 +1,57 @@
-import { useState } from "react";
-import { FaEnvelope } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { MdSms } from "react-icons/md";
 import { PiStudentBold } from "react-icons/pi";
-import { MdArrowBack } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
-const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
-  //Forgot password
+const VerifyOtp = () => {
+  const [timer, setTimer] = useState(300);
+  const [otp, setOtp] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const naviget = useNavigate();
+
+  // OTP Timer
+  useEffect(() => {
+    const expireTime = setInterval(() => {
+      setTimer((prev) => {
+        if (prev <= 1) {
+          clearInterval(expireTime);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(expireTime);
+  }, []);
+
+  // Convert seconds to minutes and seconds
+  const minutes = Math.floor(timer / 60);
+  const seconds = timer % 60;
+
+  //Verify OTP
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
+      const email = localStorage.getItem("emailVerify");
+      if (timer === 0) {
+        alert("OTP Expired");
+        return;
+      }
       const options = {
         headers: {
-          "Content-type": "application/json",
+          "Content-Type": "application/json",
         },
       };
-      setIsLoading(true);
       await axios.post(
-        "http://localhost:3000/api/pass/forgotPass",
-        { email },
+        "http://localhost:3000/api/pass/verifyOtp",
+        { email, otp },
         options,
       );
-      toast.success("OTP send your register email.", {
+      toast.success("OTP Verify Successfully.", {
         duration: 3000,
         position: "top-center",
         style: {
@@ -35,8 +60,7 @@ const ForgotPassword = () => {
           color: "#713200",
         },
       });
-      localStorage.setItem("emailVerify", email);
-      navigate("/verifyotp");
+      naviget("/newPassword");
     } catch (error) {
       toast.error(error.response?.data?.message || "Opps! Server Error...", {
         duration: 3000,
@@ -48,85 +72,65 @@ const ForgotPassword = () => {
         },
       });
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
-
-    
   };
 
   return (
     <section className="w-full min-h-screen bg-gradient-to-b from-blue-50 to-white flex items-center justify-center px-6 py-12">
-      {/* Card */}
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl border border-blue-100 p-8">
-        {/* Back Button */}
-        <Link
-          to="/login"
-          className="flex items-center gap-2 text-gray-500 hover:text-blue-600 transition-all duration-300"
-        >
-          <MdArrowBack size={20} />
-          Back
-        </Link>
-
         {/* Logo */}
         <div className="flex flex-col items-center mt-4">
           <div className="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center">
             <PiStudentBold className="text-4xl text-blue-600" />
           </div>
 
-          <h1 className="text-3xl font-bold text-gray-900 mt-5">
-            Forgot Password
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-900 mt-5">Verify OTP</h1>
 
           <p className="text-gray-500 mt-2 text-center leading-relaxed">
-            Enter your registered email address and we’ll send you an OTP to
-            reset your password.
+            Enter OTP and change your password.
           </p>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="mt-8">
-          {/* Email Field */}
+          {/* OTP Field */}
           <div>
             <label className="text-sm font-medium text-gray-700">
-              Email Address
+              Enter OTP
             </label>
 
             <div className="mt-2 flex items-center border border-blue-100 rounded-xl px-4 focus-within:border-blue-500 transition-all duration-300">
-              <FaEnvelope className="text-gray-400" />
+              <MdSms className="text-gray-400" />
 
               <input
-                type="email"
-                placeholder="Enter your email"
+                type="number"
+                placeholder="Enter OTP"
                 className="w-full px-3 py-3 outline-none bg-transparent"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
                 required
               />
             </div>
           </div>
 
-          {/* Submit Button */}
+          {/* Timer */}
+          <p className="text-gray-500 mt-6">
+            OTP expires in {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+          </p>
+
+          {/* Button */}
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-medium shadow-md transition-all duration-300 mt-6"
+            disabled={timer === 0}
+            className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white py-3 rounded-xl font-medium shadow-md transition-all duration-300 mt-6"
           >
-            {isLoading ? <BeatLoader /> : "Send OTP"}
+            {loading ? <BeatLoader /> : "Verify OTP"}
           </button>
         </form>
-
-        {/* Bottom Text */}
-        <p className="text-center text-gray-500 mt-6">
-          Remember your password?
-          <Link
-            to="/login"
-            className="text-blue-600 font-medium cursor-pointer ml-1 hover:underline"
-          >
-            Login
-          </Link>
-        </p>
       </div>
     </section>
   );
 };
 
-export default ForgotPassword;
+export default VerifyOtp;

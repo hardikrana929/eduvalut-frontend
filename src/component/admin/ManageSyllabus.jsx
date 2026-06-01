@@ -293,7 +293,7 @@ const ManageSyllabus = () => {
 
       setBranches(result.data.data);
     } catch (error) {
-      console.log(error);
+      toast.error(error.response?.data?.message || "Opps! Server Error...");
     }
   };
 
@@ -312,7 +312,7 @@ const ManageSyllabus = () => {
 
       setSemesters(result.data.data);
     } catch (error) {
-      console.log(error);
+      toast.error(error.response?.data?.message || "Opps! Server Error...");
     }
   };
   useEffect(() => {

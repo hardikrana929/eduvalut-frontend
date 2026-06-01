@@ -174,8 +174,6 @@ const ManagePaper = () => {
         options,
       );
       setpaperList(result.data.data);
-
-      console.log(result.data.data);
     } catch (error) {
       toast.error(error.response?.data?.message || "Opps! Server Error...", {
         duration: 3000,
@@ -285,7 +283,7 @@ const ManagePaper = () => {
 
       setBranches(result.data.data);
     } catch (error) {
-      console.log(error);
+      toast.error(error.response?.data?.message || "Opps! Server Error...");
     }
   };
 
@@ -304,7 +302,7 @@ const ManagePaper = () => {
 
       setSemesters(result.data.data);
     } catch (error) {
-      console.log(error);
+      toast.error(error.response?.data?.message || "Opps! Server Error...");
     }
   };
   useEffect(() => {

@@ -26,14 +26,14 @@ const Login = () => {
         }
       } catch (error) {
         toast.success(error.response?.data?.message, {
-            duration: 3000,
-            position: "bottom-center",
-            style: {
-              border: "1px solid #713200",
-              padding: "16px",
-              color: "#713200",
-            },
-          });
+          duration: 3000,
+          position: "bottom-center",
+          style: {
+            border: "1px solid #713200",
+            padding: "16px",
+            color: "#713200",
+          },
+        });
         localStorage.removeItem("user");
       }
     }
@@ -53,7 +53,7 @@ const Login = () => {
       if (formData.password.length < 8) {
         toast.success("Password must greater or equal 8 charecters.", {
           duration: 3000,
-          position: "bottom-center",
+          position: "top-center",
           style: {
             border: "1px solid #713200",
             padding: "16px",
@@ -68,7 +68,7 @@ const Login = () => {
           .then((res) => {
             toast.success("Login Success.", {
               duration: 3000,
-              position: "bottom-center",
+              position: "top-center",
               style: {
                 border: "1px solid #713200",
                 padding: "16px",
@@ -102,7 +102,6 @@ const Login = () => {
         },
       });
     }
-    console.log(formData);
   };
 
   return (
