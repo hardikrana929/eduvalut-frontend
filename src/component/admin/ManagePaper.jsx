@@ -118,7 +118,7 @@ const ManagePaper = () => {
         formData.append("semesterId", semesterId);
         formData.append("branchId", branchId);
         formData.append("uploadedBy", localUser.id);
-        formData.append("paper", paper);
+        formData.append("pdfs", paper);
         formData.append("year", year);
 
         const options = {
@@ -908,14 +908,6 @@ const ManagePaper = () => {
                       Click to upload PDF
                     </p>
 
-                    <p className="text-sm text-gray-500 mt-1">
-                      Drag & drop your file here
-                    </p>
-
-                    {/* <p className="text-xs text-gray-400 mt-3">
-                      Only PDF files • Max size 2MB
-                    </p> */}
-
                     {paper && (
                       <div className="mt-4 px-4 py-2 bg-white border rounded-xl shadow-sm">
                         <p className="text-sm font-medium text-blue-600 truncate max-w-[220px]">
@@ -928,7 +920,7 @@ const ManagePaper = () => {
                   <input
                     id="pdfUpload"
                     type="file"
-                    name="pdf"
+                    name="pdfs"
                     accept=".pdf"
                     onChange={(e) => setpaper(e.target.files[0])}
                     className="hidden"

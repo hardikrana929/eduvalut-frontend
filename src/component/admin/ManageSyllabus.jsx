@@ -112,7 +112,7 @@ const ManageSyllabus = () => {
         formData.append("semesterId", semesterId);
         formData.append("branchId", branchId);
         formData.append("uploadedBy", localUser.id);
-        formData.append("pdf", pdf);
+        formData.append("pdfs", pdf);
         formData.append("syllabusType", "Syllabus");
 
         const options = {
@@ -846,10 +846,6 @@ const ManageSyllabus = () => {
                       Click to upload PDF
                     </p>
 
-                    <p className="text-sm text-gray-500 mt-1">
-                      Drag & drop your file here
-                    </p>
-
                     {/* <p className="text-xs text-gray-400 mt-3">
                       Only PDF files • Max size 2MB
                     </p> */}
@@ -866,7 +862,7 @@ const ManageSyllabus = () => {
                   <input
                     id="pdfUpload"
                     type="file"
-                    name="pdf"
+                    name="pdfs"
                     accept=".pdf"
                     onChange={(e) => setPdf(e.target.files[0])}
                     className="hidden"

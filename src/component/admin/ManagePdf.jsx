@@ -107,13 +107,14 @@ const ManagePdf = () => {
           },
         });
       } else {
+        const syllabusType = "Material";
         setUploadLoading(true);
         const formData = new FormData();
         formData.append("title", title);
         formData.append("semesterId", semesterId);
         formData.append("branchId", branchId);
         formData.append("uploadedBy", localUser.id);
-        formData.append("pdf", pdf);
+        formData.append("pdfs", pdf);
         formData.append("syllabusType", "Material");
 
         const options = {
@@ -179,7 +180,10 @@ const ManagePdf = () => {
         "http://localhost:3000/api/pdf/getPdfs",
         options,
       );
-      setPdfList(result.data.data);
+      const onlyMaterial = result.data.data.filter(
+        (item) => item.syllabus_type === "Material",
+      );
+      setPdfList(onlyMaterial);
     } catch (error) {
       toast.error(error.response?.data?.message || "Opps! Server Error...", {
         duration: 3000,
@@ -868,10 +872,6 @@ const ManagePdf = () => {
                       Click to upload PDF
                     </p>
 
-                    <p className="text-sm text-gray-500 mt-1">
-                      Drag & drop your file here
-                    </p>
-
                     {/* <p className="text-xs text-gray-400 mt-3">
                       Only PDF files • Max size 2MB
                     </p> */}
@@ -888,7 +888,7 @@ const ManagePdf = () => {
                   <input
                     id="pdfUpload"
                     type="file"
-                    name="pdf"
+                    name="pdfs"
                     accept=".pdf"
                     onChange={(e) => setPdf(e.target.files[0])}
                     className="hidden"
