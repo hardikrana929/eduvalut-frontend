@@ -700,14 +700,15 @@ const StdDashboard = () => {
                         )}
                       </div>
                     </div>
+                  </div>
 
-                    {/* DOWNLOAD BUTTON */}
-                    <div className="flex justify-end mt-6">
-                      <button
-                        onClick={() =>
-                          window.open(item.pdf_url || item.paper_url, "_blank")
-                        }
-                        className="
+                  {/* DOWNLOAD BUTTON */}
+                  <div className="flex justify-end mt-6">
+                    <button
+                      onClick={() =>
+                        window.open(item.pdf_url || item.paper_url, "_blank")
+                      }
+                      className="
                           w-11 h-11
                           rounded-xl
                           bg-blue-50
@@ -715,10 +716,9 @@ const StdDashboard = () => {
                           flex items-center justify-center
                           transition-all duration-300
                         "
-                      >
-                        <FaDownload className="text-blue-600" />
-                      </button>
-                    </div>
+                    >
+                      <FaDownload className="text-blue-600" />
+                    </button>
                   </div>
                 </div>
               </div>
