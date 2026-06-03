@@ -622,29 +622,29 @@ const StdDashboard = () => {
               <div key={item.id} className="min-h-[260px] flex flex-col">
                 <div
                   className="
-    h-full
-    bg-white
-    border border-blue-100
-    rounded-3xl
-    p-5
-    shadow-sm
-    hover:shadow-lg
-    hover:-translate-y-1
-    transition-all duration-300
-    flex flex-col
-  "
+                    h-full
+                    bg-white
+                    border border-blue-100
+                    rounded-3xl
+                    p-5
+                    shadow-sm
+                    hover:shadow-lg
+                    hover:-translate-y-1
+                    transition-all duration-300
+                    flex flex-col
+                  "
                 >
                   {/* Top Section */}
                   <div className="flex gap-4">
                     {/* PDF ICON */}
                     <div
                       className="
-        w-16 h-16
-        rounded-2xl
-        bg-blue-100
-        flex items-center justify-center
-        flex-shrink-0
-      "
+                        w-16 h-16
+                        rounded-2xl
+                        bg-blue-100
+                        flex items-center justify-center
+                        flex-shrink-0
+                      "
                     >
                       {activeTab === "paper" ? (
                         <FaFileAlt className="text-3xl text-green-600" />
@@ -659,13 +659,13 @@ const StdDashboard = () => {
                     <div className="flex-1 min-w-0">
                       <h3
                         className="
-          text-gray-800
-          font-semibold
-          text-base
-          leading-6
-          line-clamp-2
-          min-h-[48px]
-        "
+                        text-gray-800
+                        font-semibold
+                        text-base
+                        leading-6
+                        line-clamp-2
+                        min-h-[48px]
+                      "
                       >
                         {item.title || item.subject_name || "Untitled"}
                       </h3>
@@ -673,20 +673,20 @@ const StdDashboard = () => {
                   </div>
 
                   {/* Bottom Section */}
-                  <div className="mt-auto pt-5 flex justify-between items-end">
+                  <div className="mt-auto pt-1 flex justify-between items-end">
                     {/* Semester + Branch */}
                     <div className="flex flex-col gap-2">
                       {item.semester_name && (
                         <span
                           className="
-            bg-blue-50
-            text-blue-600
-            text-xs
-            font-medium
-            px-3 py-1
-            rounded-full
-            w-fit
-          "
+                            bg-blue-50
+                            text-blue-600
+                            text-xs
+                            font-medium
+                            px-3 py-1
+                            rounded-full
+                            w-fit
+                          "
                         >
                           {item.semester_name}
                         </span>
@@ -695,14 +695,14 @@ const StdDashboard = () => {
                       {item.branch_name && (
                         <span
                           className="
-            bg-purple-50
-            text-purple-600
-            text-xs
-            font-medium
-            px-3 py-1
-            rounded-full
-            w-fit
-          "
+                            bg-purple-50
+                            text-purple-600
+                            text-xs
+                            font-medium
+                            px-3 py-1
+                            rounded-full
+                            w-fit
+                          "
                         >
                           {item.branch_name}
                         </span>
@@ -715,22 +715,22 @@ const StdDashboard = () => {
                         window.open(item.pdf_url || item.paper_url, "_blank")
                       }
                       className="
-        w-12 h-12
-        rounded-2xl
-        bg-blue-50
-        hover:bg-blue-600
-        group
-        flex items-center justify-center
-        transition-all duration-300
-        shadow-sm
-      "
+                        w-12 h-12
+                        rounded-2xl
+                        bg-blue-50
+                        hover:bg-blue-600
+                        group
+                        flex items-center justify-center
+                        transition-all duration-300
+                        shadow-sm
+                      "
                     >
                       <FaDownload
                         className="
-          text-blue-600
-          group-hover:text-white
-          transition-all duration-300
-        "
+                        text-blue-600
+                        group-hover:text-white
+                        transition-all duration-300
+                      "
                       />
                     </button>
                   </div>
