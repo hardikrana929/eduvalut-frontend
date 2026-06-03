@@ -566,8 +566,62 @@ const StdDashboard = () => {
         </div>
         {/* PDF RESULT CARDS */}
 
-        <div
-  className="
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6">
+          {isLoading ? (
+            [...Array(8)].map((_, index) => <SkeletonCard key={index} />)
+          ) : currentData.length === 0 ? (
+            // EMPTY STATE
+            <div
+              className="
+                col-span-full
+                flex flex-col items-center justify-between
+                py-20
+              "
+            >
+              {/* ICON */}
+              <div
+                className="
+          w-24 h-24
+          rounded-full
+          bg-blue-50
+          flex items-center justify-center
+        "
+              >
+                <FaFilePdf className="text-5xl text-blue-300" />
+              </div>
+
+              {/* TITLE */}
+              <h2 className="text-2xl font-bold text-gray-700 mt-6">
+                No Resources Found
+              </h2>
+
+              {/* DESCRIPTION */}
+              <p className="text-gray-500 mt-2 text-center max-w-md">
+                We couldn't find any PDFs, papers, or syllabus matching your
+                search.
+              </p>
+
+              {/* OPTIONAL BUTTON */}
+              <button
+                onClick={() => setSearch("")}
+                className="
+          mt-5
+          px-5 py-3
+          rounded-2xl
+          bg-blue-500
+          hover:bg-blue-700
+          text-white
+          transition-all duration-300
+        "
+              >
+                Clear Search
+              </button>
+            </div>
+          ) : (
+            currentData.map((item) => (
+              <div key={item.id} className="min-h-[260px] flex flex-col">
+                <div
+                  className="
     h-full
     bg-white
     border border-blue-100
@@ -579,33 +633,32 @@ const StdDashboard = () => {
     transition-all duration-300
     flex flex-col
   "
->
-  {/* Top Section */}
-  <div className="flex gap-4">
-    
-    {/* PDF ICON */}
-    <div
-      className="
+                >
+                  {/* Top Section */}
+                  <div className="flex gap-4">
+                    {/* PDF ICON */}
+                    <div
+                      className="
         w-16 h-16
         rounded-2xl
         bg-blue-100
         flex items-center justify-center
         flex-shrink-0
       "
-    >
-      {activeTab === "paper" ? (
-        <FaFileAlt className="text-3xl text-green-600" />
-      ) : activeTab === "Syllabus" ? (
-        <FaBook className="text-3xl text-purple-600" />
-      ) : (
-        <FaFilePdf className="text-3xl text-blue-600" />
-      )}
-    </div>
+                    >
+                      {activeTab === "paper" ? (
+                        <FaFileAlt className="text-3xl text-green-600" />
+                      ) : activeTab === "Syllabus" ? (
+                        <FaBook className="text-3xl text-purple-600" />
+                      ) : (
+                        <FaFilePdf className="text-3xl text-blue-600" />
+                      )}
+                    </div>
 
-    {/* TITLE */}
-    <div className="flex-1 min-w-0">
-      <h3
-        className="
+                    {/* TITLE */}
+                    <div className="flex-1 min-w-0">
+                      <h3
+                        className="
           text-gray-800
           font-semibold
           text-base
@@ -613,20 +666,19 @@ const StdDashboard = () => {
           line-clamp-2
           min-h-[48px]
         "
-      >
-        {item.title || item.subject_name || "Untitled"}
-      </h3>
-    </div>
-  </div>
+                      >
+                        {item.title || item.subject_name || "Untitled"}
+                      </h3>
+                    </div>
+                  </div>
 
-  {/* Bottom Section */}
-  <div className="mt-auto pt-5 flex justify-between items-end">
-    
-    {/* Semester + Branch */}
-    <div className="flex flex-col gap-2">
-      {item.semester_name && (
-        <span
-          className="
+                  {/* Bottom Section */}
+                  <div className="mt-auto pt-5 flex justify-between items-end">
+                    {/* Semester + Branch */}
+                    <div className="flex flex-col gap-2">
+                      {item.semester_name && (
+                        <span
+                          className="
             bg-blue-50
             text-blue-600
             text-xs
@@ -635,14 +687,14 @@ const StdDashboard = () => {
             rounded-full
             w-fit
           "
-        >
-          {item.semester_name}
-        </span>
-      )}
+                        >
+                          {item.semester_name}
+                        </span>
+                      )}
 
-      {item.branch_name && (
-        <span
-          className="
+                      {item.branch_name && (
+                        <span
+                          className="
             bg-purple-50
             text-purple-600
             text-xs
@@ -651,18 +703,18 @@ const StdDashboard = () => {
             rounded-full
             w-fit
           "
-        >
-          {item.branch_name}
-        </span>
-      )}
-    </div>
+                        >
+                          {item.branch_name}
+                        </span>
+                      )}
+                    </div>
 
-    {/* Download Button */}
-    <button
-      onClick={() =>
-        window.open(item.pdf_url || item.paper_url, "_blank")
-      }
-      className="
+                    {/* Download Button */}
+                    <button
+                      onClick={() =>
+                        window.open(item.pdf_url || item.paper_url, "_blank")
+                      }
+                      className="
         w-12 h-12
         rounded-2xl
         bg-blue-50
@@ -672,17 +724,21 @@ const StdDashboard = () => {
         transition-all duration-300
         shadow-sm
       "
-    >
-      <FaDownload
-        className="
+                    >
+                      <FaDownload
+                        className="
           text-blue-600
           group-hover:text-white
           transition-all duration-300
         "
-      />
-    </button>
-  </div>
-</div>
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
         {/* PAGINATION */}
         {filteredData.length > 0 && (
           <div
