@@ -566,7 +566,7 @@ const StdDashboard = () => {
         </div>
         {/* PDF RESULT CARDS */}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mt-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6">
           {isLoading ? (
             [...Array(8)].map((_, index) => <SkeletonCard key={index} />)
           ) : currentData.length === 0 ? (
@@ -628,13 +628,14 @@ const StdDashboard = () => {
                     rounded-3xl
                     p-5
                     shadow-sm
-                    hover:shadow-md
-                    transition-all duration-300
-                    flex flex-col justify-between
+                    hover:shadow-xl
+                    hover:-translate-y-1
+                    transition-all duration-300 
+                    flex flex-col                    
                   "
                 >
                   {/* TOP */}
-                  <div className="flex gap-4">
+                  <div className="flex gap-4 items-start">
                     {/* ICON */}
                     <div
                       className="
@@ -658,28 +659,32 @@ const StdDashboard = () => {
                     <div className="flex-1 min-w-0">
                       <h3
                         className="
-              font-semibold
-              text-gray-800
-              text-[15px]
-              leading-6
-              break-words
-              line-clamp-2
-            "
+                        font-semibold
+                        text-gray-800
+                        text-base
+                        leading-6
+                        break-words
+                        line-clamp-2
+                        min-h-[48px]
+                      "
                       >
                         {item.title || item.subject_name || "Untitled"}
                       </h3>
 
                       {/* TAGS */}
-                      <div className="flex flex-wrap gap-2 mt-4">
+                      <div className="flex flex-wrap gap-2 mt-3">
                         {item.semester_name && (
                           <span
                             className="
-                  bg-blue-50
-                  text-blue-600
-                  text-xs
-                  px-3 py-1
-                  rounded-full
-                "
+                            bg-blue-50
+                            text-blue-600
+                            text-xs
+                            font-medium
+                            px-3 py-1
+                            rounded-full
+                            truncate
+                            max-w-full
+                          "
                           >
                             {item.semester_name}
                           </span>
@@ -688,12 +693,15 @@ const StdDashboard = () => {
                         {item.branch_name && (
                           <span
                             className="
-                  bg-purple-50
-                  text-purple-600
-                  text-xs
-                  px-3 py-1
-                  rounded-full
-                "
+                            bg-blue-50
+                            text-blue-600
+                            text-xs
+                            font-medium
+                            px-3 py-1
+                            rounded-full
+                            truncate
+                            max-w-full
+                          "
                           >
                             {item.branch_name}
                           </span>
@@ -703,21 +711,29 @@ const StdDashboard = () => {
                   </div>
 
                   {/* DOWNLOAD BUTTON */}
-                  <div className="flex justify-end mt-6">
+                  <div className="mt-auto pt-5 flex justify-end">
                     <button
                       onClick={() =>
                         window.open(item.pdf_url || item.paper_url, "_blank")
                       }
                       className="
-                          w-11 h-11
-                          rounded-xl
-                          bg-blue-50
-                          hover:bg-blue-100
-                          flex items-center justify-center
+                         w-12 h-12
+                        rounded-2xl
+                        bg-blue-50
+                        hover:bg-blue-600
+                        group
+                        flex items-center justify-center
+                        transition-all duration-300
+                        shadow-sm
+                    "
+                    >
+                      <FaDownload
+                        className="
+                          text-blue-600
+                          group-hover:text-white
                           transition-all duration-300
                         "
-                    >
-                      <FaDownload className="text-blue-600" />
+                      />
                     </button>
                   </div>
                 </div>
