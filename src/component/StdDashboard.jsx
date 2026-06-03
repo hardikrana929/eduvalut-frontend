@@ -46,7 +46,7 @@ const StdDashboard = () => {
   const token = localStorage.getItem("token");
   // PAGINATION
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 16;
+  const itemsPerPage = 8;
 
   let currentTab = [];
 
