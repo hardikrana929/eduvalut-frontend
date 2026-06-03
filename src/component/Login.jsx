@@ -62,7 +62,7 @@ const Login = () => {
         });
       } else {
         await axios
-          .post("https://eduvault-backend.vercel.app/api/student/loginstudent", {
+          .post("https://eduvault-backend.vercel.app/api/student/login-student", {
             ...formData,
           })
           .then((res) => {
