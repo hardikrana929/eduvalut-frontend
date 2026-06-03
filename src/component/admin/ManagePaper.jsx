@@ -129,7 +129,7 @@ const ManagePaper = () => {
         };
 
         const result = await axios.post(
-          "http://localhost:3000/api/paper/addPaper",
+          "https://eduvalut-backend.vercel.app/api/paper/addPaper",
           formData,
           options,
         );
@@ -170,7 +170,7 @@ const ManagePaper = () => {
         },
       };
       const result = await axios.get(
-        "http://localhost:3000/api/paper/getPaper",
+        "https://eduvalut-backend.vercel.app/api/paper/getPaper",
         options,
       );
       setpaperList(result.data.data);
@@ -228,7 +228,7 @@ const ManagePaper = () => {
       };
 
       await axios.put(
-        `http://localhost:3000/api/paper/updatePaper/${editId}`,
+        `https://eduvalut-backend.vercel.app/api/paper/updatePaper/${editId}`,
         data,
         options,
       );
@@ -257,7 +257,7 @@ const ManagePaper = () => {
       let sure = confirm("Are you sure you went to delete.");
       if (sure) {
         await axios.delete(
-          `http://localhost:3000/api/paper/deletePaper/${id}`,
+          `https://eduvalut-backend.vercel.app/api/paper/deletePaper/${id}`,
           options,
         );
         toast.success("paper Deleted successfully.");
@@ -277,7 +277,7 @@ const ManagePaper = () => {
         },
       };
       const result = await axios.get(
-        "http://localhost:3000/api/branch/getBranch",
+        "https://eduvalut-backend.vercel.app/api/branch/getBranch",
         options,
       );
 
@@ -296,7 +296,7 @@ const ManagePaper = () => {
         },
       };
       const result = await axios.get(
-        "http://localhost:3000/api/semester/getSemester",
+        "https://eduvalut-backend.vercel.app/api/semester/getSemester",
         options,
       );
 

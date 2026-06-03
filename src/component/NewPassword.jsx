@@ -55,7 +55,7 @@ const NewPassword = () => {
       };
 
       await axios.post(
-        "http://localhost:3000/api/pass/updatePass",
+        "https://eduvalut-backend.vercel.app/api/pass/updatePass",
         {
           email,
           newPassword: pass,

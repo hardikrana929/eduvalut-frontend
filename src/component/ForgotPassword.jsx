@@ -22,7 +22,7 @@ const ForgotPassword = () => {
       };
       setIsLoading(true);
       await axios.post(
-        "https://eduvault-backend.vercel.app/api/pass/forgotPass",
+        "https://eduvalut-backend.vercel.app/api/pass/forgotPass",
         { email },
         options,
       );

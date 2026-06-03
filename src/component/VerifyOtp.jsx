@@ -47,7 +47,7 @@ const VerifyOtp = () => {
         },
       };
       await axios.post(
-        "http://localhost:3000/api/pass/verifyOtp",
+        "https://eduvalut-backend.vercel.app/api/pass/verifyOtp",
         { email, otp },
         options,
       );

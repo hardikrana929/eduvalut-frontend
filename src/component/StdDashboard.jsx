@@ -90,7 +90,7 @@ const StdDashboard = () => {
         },
       };
       const result = await axios.get(
-        "http://localhost:3000/api/pdf/getPdfs",
+        "https://eduvalut-backend.vercel.app/api/pdf/getPdfs",
         options,
       );
       setPdfList(result.data.data);
@@ -125,7 +125,7 @@ const StdDashboard = () => {
         },
       };
       await axios.post(
-        "http://localhost:3000/api/feedback/addFeedback",
+        "https://eduvalut-backend.vercel.app/api/feedback/addFeedback",
         newObj,
         options,
       );
@@ -166,7 +166,7 @@ const StdDashboard = () => {
         },
       };
       const result = await axios.get(
-        "http://localhost:3000/api/paper/getPaper",
+        "https://eduvalut-backend.vercel.app/api/paper/getPaper",
         options,
       );
       setPaperList(result.data.data);
@@ -193,7 +193,7 @@ const StdDashboard = () => {
         },
       };
       const result = await axios.get(
-        "http://localhost:3000/api/branch/getBranch",
+        "https://eduvalut-backend.vercel.app/api/branch/getBranch",
         options,
       );
 
@@ -219,7 +219,7 @@ const StdDashboard = () => {
         },
       };
       const result = await axios.get(
-        "http://localhost:3000/api/semester/getSemester",
+        "https://eduvalut-backend.vercel.app/api/semester/getSemester",
         options,
       );
 

@@ -133,7 +133,7 @@ const ManageSyllabus = () => {
           });
         } else {
           const result = await axios.post(
-            "http://localhost:3000/api/pdf/addPdf",
+            "https://eduvalut-backend.vercel.app/api/pdf/addPdf",
             formData,
             options,
           );
@@ -175,7 +175,7 @@ const ManageSyllabus = () => {
         },
       };
       const result = await axios.get(
-        "http://localhost:3000/api/pdf/getPdfs",
+        "https://eduvalut-backend.vercel.app/api/pdf/getPdfs",
         options,
       );
 
@@ -238,7 +238,7 @@ const ManageSyllabus = () => {
       };
 
       await axios.put(
-        `http://localhost:3000/api/pdf/updatePdf/${editId}`,
+        `https://eduvalut-backend.vercel.app/api/pdf/updatePdf/${editId}`,
         formData,
         options,
       );
@@ -267,7 +267,7 @@ const ManageSyllabus = () => {
       let sure = confirm("Are you sure you went to delete.");
       if (sure) {
         await axios.delete(
-          `http://localhost:3000/api/pdf/deletePdf/${id}`,
+          `https://eduvalut-backend.vercel.app/api/pdf/deletePdf/${id}`,
           options,
         );
         toast.success("Pdf Deleted successfully.");
@@ -287,7 +287,7 @@ const ManageSyllabus = () => {
         },
       };
       const result = await axios.get(
-        "http://localhost:3000/api/branch/getBranch",
+        "https://eduvalut-backend.vercel.app/api/branch/getBranch",
         options,
       );
 
@@ -306,7 +306,7 @@ const ManageSyllabus = () => {
         },
       };
       const result = await axios.get(
-        "http://localhost:3000/api/semester/getSemester",
+        "https://eduvalut-backend.vercel.app/api/semester/getSemester",
         options,
       );
 

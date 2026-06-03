@@ -49,7 +49,7 @@ const Signup = () => {
       return;
     }
     try {
-      const res = await axios.post("https://eduvault-backend.vercel.app/api/student/signup-student", {
+      const res = await axios.post("https://eduvalut-backend.vercel.app/api/student/signup-student", {
         ...formData,
       });
 

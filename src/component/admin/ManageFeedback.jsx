@@ -20,7 +20,7 @@ const MangeFeedback = () => {
       let sure = confirm("Are you sure you went to delete.");
       if (sure) {
         const deleteData = await axios.delete(
-          `http://localhost:3000/api/feedback/deleteFeedback/${id}`,
+          `https://eduvalut-backend.vercel.app/api/feedback/deleteFeedback/${id}`,
           options,
         );
         toast.success(deleteData.data.message || "Feedback Deleted");
@@ -44,7 +44,7 @@ const MangeFeedback = () => {
       };
 
       const getData = await axios.get(
-        "http://localhost:3000/api/feedback/getFeedback",
+        "https://eduvalut-backend.vercel.app/api/feedback/getFeedback",
         options,
       );
 
