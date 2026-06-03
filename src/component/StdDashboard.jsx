@@ -619,7 +619,7 @@ const StdDashboard = () => {
             </div>
           ) : (
             currentData.map((item) => (
-              <div key={item.id} className="h-full">
+              <div key={item.id} className="min-h-[260px] flex flex-col">
                 <div
                   className="
                     h-full
