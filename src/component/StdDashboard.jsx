@@ -619,7 +619,7 @@ const StdDashboard = () => {
             </div>
           ) : (
             currentData.map((item) => (
-              <div key={item.id} className="h-[260px] flex flex-col">
+              <div key={item.id} className="flex flex-col h-full">
                 <div
                   className="
                     h-full
@@ -663,8 +663,7 @@ const StdDashboard = () => {
                         font-semibold
                         text-base
                         leading-6
-                        line-clamp-2
-                        min-h-[48px]
+                        line-clamp-2                        
                       "
                       >
                         {item.title || item.subject_name || "Untitled"}
@@ -673,7 +672,7 @@ const StdDashboard = () => {
                   </div>
 
                   {/* Bottom Section */}
-                  <div className="mt-auto pt-1 flex justify-between items-end">
+                   <div className="mt-4 flex justify-between items-end">
                     {/* Semester + Branch */}
                     <div className="flex flex-col gap-2">
                       {item.semester_name && (
