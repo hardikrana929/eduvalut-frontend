@@ -85,14 +85,14 @@ const Footer = () => {
               </a>
 
               <a
-                href="#"
+                href="https://www.linkedin.com/in/hardik-asavala/"
                 className="w-11 h-11 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-300"
               >
                 <FaLinkedinIn />
               </a>
 
               <a
-                href="#"
+                href="https://github.com/hardikrana929"
                 className="w-11 h-11 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-300"
               >
                 <FaGithub />
@@ -104,7 +104,8 @@ const Footer = () => {
         {/* Bottom */}
         <div className="border-t border-blue-100 mt-12 pt-6 text-center">
           <p className="text-gray-500 text-sm">
-            © 2026 EduVault. All Rights Reserved.
+            © 2026 EduVault. All Rights Reserved. Created by Hardik Asavala.
+
           </p>
         </div>
       </div>

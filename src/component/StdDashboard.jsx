@@ -581,11 +581,11 @@ const StdDashboard = () => {
               {/* ICON */}
               <div
                 className="
-          w-24 h-24
-          rounded-full
-          bg-blue-50
-          flex items-center justify-center
-        "
+                  w-24 h-24
+                  rounded-full
+                  bg-blue-50
+                  flex items-center justify-center
+                "
               >
                 <FaFilePdf className="text-5xl text-blue-300" />
               </div>
@@ -605,14 +605,14 @@ const StdDashboard = () => {
               <button
                 onClick={() => setSearch("")}
                 className="
-          mt-5
-          px-5 py-3
-          rounded-2xl
-          bg-blue-500
-          hover:bg-blue-700
-          text-white
-          transition-all duration-300
-        "
+                  mt-5
+                  px-5 py-3
+                  rounded-2xl
+                  bg-blue-500
+                  hover:bg-blue-700
+                  text-white
+                  transition-all duration-300
+                "
               >
                 Clear Search
               </button>
