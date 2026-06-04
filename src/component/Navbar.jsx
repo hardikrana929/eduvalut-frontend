@@ -3,10 +3,10 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import { PiStudentBold } from "react-icons/pi";
 import { Link } from "react-router-dom";
-import Heropage from "./Homepage";
-import ManageSyllabus from "./ManageSyllabus";
-import ManagePapers from "./ManagePapers";
-import Feedback from "./Feedback";
+import Heropage from "./Heropage";
+import ManageSyllabus from "../component/admin/ManageSyllabus";
+import ManagePapers from "../component/admin/ManagePaper";
+import Feedback from "../component/admin/ManageFeedback";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
