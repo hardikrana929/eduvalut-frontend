@@ -51,7 +51,7 @@ const Login = () => {
     e.preventDefault();
     try {
       if (formData.password.length < 8) {
-        toast.success("Password must greater or equal 8 charecters.", {
+        toast.error("Password must greater or equal 8 charecters.", {
           duration: 3000,
           position: "top-center",
           style: {
