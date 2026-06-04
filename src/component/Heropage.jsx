@@ -59,7 +59,7 @@ const Heropage = () => {
 
               <Link
                 to="/login"
-                className="border border-gray-300 hover:border-blue-600 hover:text-blue-600 transition-all duration-300 text-gray-700 px-6 py-3 rounded-lg font-medium"
+                className="border text-center border-gray-300 hover:border-blue-600 hover:text-blue-600 transition-all duration-300 text-gray-700 px-6 py-3 rounded-lg font-medium"
               >
                 Student Login
               </Link>
