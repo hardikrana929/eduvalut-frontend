@@ -77,7 +77,7 @@ const Login = () => {
             });
             //Store token and user in localstorage
             localStorage.setItem("token", res.data.token);
-            localStorage.setItem("user", JSON.stringify(res.data.user));
+            // localStorage.setItem("user", JSON.stringify(res.data.user));
 
             if (res.data.user.role === "student") {
               navigate("/stdDash", { replace: true });
