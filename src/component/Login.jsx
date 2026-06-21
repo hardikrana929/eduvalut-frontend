@@ -114,7 +114,7 @@ const Login = () => {
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl border border-blue-100 p-8">
         {/* Back arrow for go to dashboard */}
         <div
-          onClick={() => navigate("/dashboard")}
+          onClick={() => navigate("/")}
           className="flex items-center gap-2 mb-6 text-blue-600 cursor-pointer hover:text-blue-800 transition-all"
         >
           <FaArrowLeft size={18} />
