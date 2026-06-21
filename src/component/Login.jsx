@@ -112,6 +112,14 @@ const Login = () => {
     <section className="w-full min-h-screen `bg-gradient-to-b` from-blue-50 to-white flex items-center justify-center px-6 py-12">
       {/* Card */}
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl border border-blue-100 p-8">
+        {/* Back arrow for go to dashboard */}
+        <div
+          onClick={() => navigate("/dashboard")}
+          className="flex items-center gap-2 mb-6 text-blue-600 cursor-pointer hover:text-blue-800 transition-all"
+        >
+          <FaArrowLeft size={18} />
+          <span className="font-medium">Back to Dashboard</span>
+        </div>
         {/* Logo */}
         <div className="flex flex-col items-center">
           <div className="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center">
@@ -126,14 +134,7 @@ const Login = () => {
             Login to access syllabus PDFs and previous papers.
           </p>
         </div>
-        {/* Back arrow for go to dashboard */}
-        <div
-          onClick={() => navigate("/dashboard")}
-          className="flex items-center gap-2 mb-6 text-blue-600 cursor-pointer hover:text-blue-800 transition-all"
-        >
-          <FaArrowLeft size={18} />
-          <span className="font-medium">Back to Dashboard</span>
-        </div>
+        
         {/* Form */}
         <form onSubmit={handleSubmit} className="mt-8 space-y-5">
           {/* Email */}
