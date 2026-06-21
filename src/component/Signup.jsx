@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
+import { FaArrowLeft,FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 import { PiStudentBold } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -36,8 +36,8 @@ const Signup = () => {
       });
       return;
     }
-    if(formData.password.length < 8){
-       toast.error("Password must greater or equal 8 charecters.", {
+    if (formData.password.length < 8) {
+      toast.error("Password must greater or equal 8 charecters.", {
         duration: 3000,
         position: "top-center",
         style: {
@@ -49,9 +49,12 @@ const Signup = () => {
       return;
     }
     try {
-      const res = await axios.post("https://eduvalut-backend.vercel.app/api/student/signup-student", {
-        ...formData,
-      });
+      const res = await axios.post(
+        "https://eduvalut-backend.vercel.app/api/student/signup-student",
+        {
+          ...formData,
+        },
+      );
 
       toast.success(res.data.message, {
         duration: 3000,
@@ -62,7 +65,7 @@ const Signup = () => {
           color: "#713200",
         },
       });
-      navigate('/login', {replace:true});
+      navigate("/login", { replace: true });
       setFormData({
         fullname: "",
         email: "",
@@ -84,6 +87,14 @@ const Signup = () => {
   return (
     <section className="w-full min-h-screen bg-gradient-to-b from-blue-50 to-white flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl border border-blue-100 p-8">
+        {/* Back arrow for go to dashboard */}
+        <div
+          onClick={() => navigate("/")}
+          className="flex items-center gap-2 mb-6 text-blue-600 cursor-pointer hover:text-blue-800 transition-all"
+        >
+          <FaArrowLeft size={18} />
+          <span className="font-medium">Back to Dashboard</span>
+        </div>
         {/* Logo */}
         <div className="flex flex-col items-center">
           <div className="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center">
