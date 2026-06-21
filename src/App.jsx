@@ -9,7 +9,7 @@ import NewPassword from "./component/NewPassword";
 import { Toaster } from "react-hot-toast";
 import StdDashboard from "./component/StdDashboard";
 import AdminDashboard from "./component/AdminDashboard";
-import { ProtectedRouter, AuthAccess } from "./component/ProtectedRouter";
+import { ProtectedRouter} from "./component/ProtectedRouter";
 import ManageFeedback from "./component/admin/ManageFeedback";
 import ManagePaper from "./component/admin/ManagePaper";
 import ManagePdf from "./component/admin/ManagePdf";
@@ -29,56 +29,56 @@ function App() {
         {/* <Route
           path="/verifyotp"
           element={
-            <AuthAccess>
+            <ProtectedRouter authAccess={["admin", "student"]}>
               <VerifyOtp />
-            </AuthAccess>
+            </ProtectedRouter>
           }
         />
         <Route
           path="/newPassword"
           element={
-            <AuthAccess>
+            <ProtectedRouter authAccess={["admin", "student"]}>
               <NewPassword />
-            </AuthAccess>
+            </ProtectedRouter>
           }
         /> */}
         <Route
           path="/feedback"
           element={
-            <AuthAccess>
+            <ProtectedRouter authAccess={["admin"]}>
               <ManageFeedback />
-            </AuthAccess>
+            </ProtectedRouter>
           }
         />
         <Route
           path="/paper"
           element={
-            <AuthAccess>
+            <ProtectedRouter authAccess={["admin"]}>
               <ManagePaper />
-            </AuthAccess>
+            </ProtectedRouter>
           }
         />
         <Route
           path="/pdf"
           element={
-            <AuthAccess>
+            <ProtectedRouter authAccess={["admin"]} >
               <ManagePdf />
-            </AuthAccess>
+            </ProtectedRouter>
           }
         />
         <Route
           path="/syllabus"
           element={
-            <AuthAccess>
+            <ProtectedRouter authAccess={["admin"]}>
               <ManageSyllabus />
-            </AuthAccess>
+            </ProtectedRouter>
           }
         />
 
         <Route
           path="/stdDash"
           element={
-            <ProtectedRouter role="student">
+            <ProtectedRouter authAccess={["student"]}>
               <StdDashboard />
             </ProtectedRouter>
           }
@@ -86,7 +86,7 @@ function App() {
         <Route
           path="/adminDash"
           element={
-            <ProtectedRouter role="admin">
+            <ProtectedRouter authAccess={["admin"]}>
               <AdminDashboard />
             </ProtectedRouter>
           }

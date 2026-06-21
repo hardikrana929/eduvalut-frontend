@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { PiStudentBold } from "react-icons/pi";
+import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -62,9 +63,12 @@ const Login = () => {
         });
       } else {
         await axios
-          .post("https://eduvalut-backend.vercel.app/api/student/login-student", {
-            ...formData,
-          })
+          .post(
+            "https://eduvalut-backend.vercel.app/api/student/login-student",
+            {
+              ...formData,
+            },
+          )
           .then((res) => {
             toast.success("Login Success.", {
               duration: 3000,
@@ -122,7 +126,14 @@ const Login = () => {
             Login to access syllabus PDFs and previous papers.
           </p>
         </div>
-
+        {/* Back arrow for go to dashboard */}
+        <div
+          onClick={() => navigate("/dashboard")}
+          className="flex items-center gap-2 mb-6 text-blue-600 cursor-pointer hover:text-blue-800 transition-all"
+        >
+          <FaArrowLeft size={18} />
+          <span className="font-medium">Back to Dashboard</span>
+        </div>
         {/* Form */}
         <form onSubmit={handleSubmit} className="mt-8 space-y-5">
           {/* Email */}
