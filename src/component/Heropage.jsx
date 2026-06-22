@@ -2,10 +2,10 @@ import Testimonials from "./Testimonial";
 import WhyChoose from "./WhyChoose";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
+// import { useEffect } from "react";
 const Heropage = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // useEffect(() => {
   //   const userStr = localStorage.getItem("user");
