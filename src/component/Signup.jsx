@@ -85,7 +85,7 @@ const Signup = () => {
   };
 
   return (
-    <section className="w-full min-h-screen bg-gradient-to-b from-blue-50 to-white flex items-center justify-center px-6 py-12">
+    <section className="w-full min-h-screen `bg-gradient-to-b` from-blue-50 to-white flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl border border-blue-100 p-8">
         {/* Back arrow for go to dashboard */}
         <div
