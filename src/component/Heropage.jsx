@@ -2,29 +2,29 @@ import Testimonials from "./Testimonial";
 import WhyChoose from "./WhyChoose";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-import { Link } from "react-router-dom";
-// import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 const Heropage = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const userStr = localStorage.getItem("user");
-  //   if (userStr) {
-  //     try {
-  //       const getUser = JSON.parse(userStr);
+  useEffect(() => {
+    const userStr = localStorage.getItem("user");
+    if (userStr) {
+      try {
+        const getUser = JSON.parse(userStr);
 
-  //       // If already logged in, send them straight to their dashboard
-  //       if (getUser && getUser.role === "student") {
-  //         navigate("/stdDash", { replace: true });
-  //       } else if (getUser && getUser.role === "admin") {
-  //         navigate("/adminDash", { replace: true });
-  //       }
-  //     } catch (error) {
-  //       // If localStorage data is broken, clear it
-  //       localStorage.removeItem("user");
-  //     }
-  //   }
-  // }, [navigate]);
+        // If already logged in, send them straight to their dashboard
+        if (getUser && getUser.role === "student") {
+          navigate("/stdDash", { replace: true });
+        } else if (getUser && getUser.role === "admin") {
+          navigate("/adminDash", { replace: true });
+        }
+      } catch (error) {
+        // If localStorage data is broken, clear it
+        localStorage.removeItem("user");
+      }
+    }
+  }, [navigate]);
   return (
     <>
       <Navbar />
