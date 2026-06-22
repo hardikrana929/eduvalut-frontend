@@ -54,7 +54,7 @@ const ManagePdf = () => {
   const currentData = filteredData.slice(firstIndex, lastIndex);
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
-  const localUser = JSON.parse(localStorage.getItem("user"));
+  const localUser = JSON.parse(localStorage.getItem("user")||"null");
   const token = localStorage.getItem("token");
   //Clear Fields
   const clearFields = () => {
