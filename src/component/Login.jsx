@@ -70,6 +70,7 @@ const Login = () => {
             },
           )
           .then((res) => {
+            console.log("Before localStorage");
             toast.success("Login Success.", {
               duration: 3000,
               position: "top-center",
@@ -83,6 +84,10 @@ const Login = () => {
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("user", JSON.stringify(res.data.user));
 
+            console.log("After localStorage");
+
+            console.log(localStorage.getItem("token"));
+            console.log(localStorage.getItem("user"));
             if (res.data.user.role === "student") {
               navigate("/stdDash", { replace: true });
             } else {
@@ -134,7 +139,7 @@ const Login = () => {
             Login to access syllabus PDFs and previous papers.
           </p>
         </div>
-        
+
         {/* Form */}
         <form onSubmit={handleSubmit} className="mt-8 space-y-5">
           {/* Email */}
