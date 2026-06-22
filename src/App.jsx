@@ -45,7 +45,7 @@ function App() {
         <Route
           path="/feedback"
           element={
-            <ProtectedRouter authAccess={["admin"]}>
+            <ProtectedRouter authAccess={["student"]}>
               <ManageFeedback />
             </ProtectedRouter>
           }
@@ -53,7 +53,7 @@ function App() {
         <Route
           path="/paper"
           element={
-            <ProtectedRouter authAccess={["admin"]}>
+            <ProtectedRouter authAccess={["student"]}>
               <ManagePaper />
             </ProtectedRouter>
           }
@@ -61,7 +61,7 @@ function App() {
         <Route
           path="/pdf"
           element={
-            <ProtectedRouter authAccess={["admin"]} >
+            <ProtectedRouter authAccess={["student"]} >
               <ManagePdf />
             </ProtectedRouter>
           }
@@ -69,7 +69,7 @@ function App() {
         <Route
           path="/syllabus"
           element={
-            <ProtectedRouter authAccess={["admin"]}>
+            <ProtectedRouter authAccess={["student"]}>
               <ManageSyllabus />
             </ProtectedRouter>
           }
