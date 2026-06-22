@@ -9,7 +9,7 @@ import NewPassword from "./component/NewPassword";
 import { Toaster } from "react-hot-toast";
 import StdDashboard from "./component/StdDashboard";
 import AdminDashboard from "./component/AdminDashboard";
-import { ProtectedRouter} from "./component/ProtectedRouter";
+import { ProtectedRouter, AuthRouter} from "./component/ProtectedRouter";
 import ManageFeedback from "./component/admin/ManageFeedback";
 import ManagePaper from "./component/admin/ManagePaper";
 import ManagePdf from "./component/admin/ManagePdf";
@@ -45,40 +45,40 @@ function App() {
         <Route
           path="/feedback"
           element={
-            <ProtectedRouter authAccess={["student"]}>
+            <AuthRouter>
               <ManageFeedback />
-            </ProtectedRouter>
+            </AuthRouter>
           }
         />
         <Route
           path="/paper"
           element={
-            <ProtectedRouter authAccess={["student"]}>
+            <AuthRouter>
               <ManagePaper />
-            </ProtectedRouter>
+            </AuthRouter>
           }
         />
         <Route
           path="/pdf"
           element={
-            <ProtectedRouter authAccess={["student"]} >
+            <AuthRouter>
               <ManagePdf />
-            </ProtectedRouter>
+            </AuthRouter>
           }
         />
         <Route
           path="/syllabus"
           element={
-            <ProtectedRouter authAccess={["student"]}>
+            <AuthRouter>
               <ManageSyllabus />
-            </ProtectedRouter>
+            </AuthRouter>
           }
         />
 
         <Route
           path="/stdDash"
           element={
-            <ProtectedRouter authAccess={["student"]}>
+            <ProtectedRouter authAccess="student">
               <StdDashboard />
             </ProtectedRouter>
           }
@@ -86,7 +86,7 @@ function App() {
         <Route
           path="/adminDash"
           element={
-            <ProtectedRouter authAccess={["admin"]}>
+            <ProtectedRouter authAccess="admin">
               <AdminDashboard />
             </ProtectedRouter>
           }
