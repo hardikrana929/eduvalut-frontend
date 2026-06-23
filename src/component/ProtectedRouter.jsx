@@ -45,7 +45,7 @@ export const ProtectedRouter = ({ children, authAccess }) => {
     return <Navigate to="/login" replace />;
   }
 
-  if (authAccess && user.role !== authAccess) {
+  if (authAccess && user.role === authAccess) {
     return (
       <Navigate
         to={user.role === "admin" ? "/adminDash" : "/stdDash"}
@@ -64,7 +64,6 @@ export const AuthRouter = ({ children }) => {
   if (!token || !user) {
     return <Navigate to="/login" replace />;
   }
-  if (user.role === "admin" || user.role === "student") {
-    return children;
-  }
+
+  return children;
 };
