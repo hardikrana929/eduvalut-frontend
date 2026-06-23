@@ -64,6 +64,7 @@ export const AuthRouter = ({ children }) => {
   if (!token || !user) {
     return <Navigate to="/login" replace />;
   }
-
-  return children;
+  if (user.role === "admin" || user.role === "student") {
+    return children;
+  }
 };
