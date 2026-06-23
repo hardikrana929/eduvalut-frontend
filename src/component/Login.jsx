@@ -35,7 +35,7 @@ const Login = () => {
             color: "#713200",
           },
         });
-        // localStorage.removeItem("user");
+        localStorage.removeItem("user");
       }
     }
   }, [navigate]);
@@ -69,7 +69,7 @@ const Login = () => {
               ...formData,
             },
           )
-          .then((res) => {            
+          .then((res) => {
             toast.success("Login Success.", {
               duration: 3000,
               position: "top-center",
@@ -82,7 +82,7 @@ const Login = () => {
             //Store token and user in localstorage
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("user", JSON.stringify(res.data.user));
-
+            console.log(res.data.user.role);
             if (res.data.user.role === "student") {
               navigate("/stdDash", { replace: true });
             } else {
