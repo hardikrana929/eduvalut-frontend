@@ -28,7 +28,7 @@ const Heropage = () => {
   return (
     <>
       <Navbar />
-      <section className="w-full mt-10 min-h-screen bg-gradient-to-b from-blue-50 to-white flex items-center">
+      <section className="w-full mt-10 min-h-screen `bg-gradient-to-b` from-blue-50 to-white flex items-center">
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div>
