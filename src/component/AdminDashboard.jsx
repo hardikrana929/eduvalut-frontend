@@ -49,7 +49,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <section className="h-screen flex bg-gradient-to-b from-blue-50 to-white">
+    <section className="h-screen flex `bg-gradient-to-b` from-blue-50 to-white">
       {/* SIDEBAR */}
       <aside
         className={`
