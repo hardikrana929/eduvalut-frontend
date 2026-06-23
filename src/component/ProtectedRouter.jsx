@@ -39,13 +39,13 @@ import { Navigate } from "react-router-dom";
 export const ProtectedRouter = ({ children, authAccess }) => {
   const token = localStorage.getItem("token");
 
-  const user = JSON.parse(localStorage.getItem("user") || "null");
+  const user = JSON.parse(localStorage.getItem("user"));
 
   if (!token || !user) {
     return <Navigate to="/login" replace />;
   }
 
-  if (authAccess && user.role === authAccess) {
+  if (authAccess && user.role !== authAccess) {
     return (
       <Navigate
         to={user.role === "admin" ? "/adminDash" : "/stdDash"}
@@ -59,7 +59,7 @@ export const ProtectedRouter = ({ children, authAccess }) => {
 
 export const AuthRouter = ({ children }) => {
   const token = localStorage.getItem("token");
-  const user = JSON.parse(localStorage.getItem("user") || "null");
+  const user = JSON.parse(localStorage.getItem("user"));
 
   if (!token || !user) {
     return <Navigate to="/login" replace />;
