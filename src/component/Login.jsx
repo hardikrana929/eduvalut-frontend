@@ -69,8 +69,7 @@ const Login = () => {
               ...formData,
             },
           )
-          .then((res) => {
-            console.log("Before localStorage");
+          .then((res) => {            
             toast.success("Login Success.", {
               duration: 3000,
               position: "top-center",
@@ -84,10 +83,6 @@ const Login = () => {
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("user", JSON.stringify(res.data.user));
 
-            console.log("After localStorage");
-
-            console.log(localStorage.getItem("token"));
-            console.log(localStorage.getItem("user"));
             if (res.data.user.role === "student") {
               navigate("/stdDash", { replace: true });
             } else {
