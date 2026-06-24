@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { IoClose } from "react-icons/io5";
+import { jwtDecode } from "jwt-decode";
 import { BeatLoader } from "react-spinners";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
@@ -31,8 +32,10 @@ const StdDashboard = () => {
   const [openFeedback, setOpenFeedback] = useState(false);
   const [rating, setRating] = useState(0);
   const [description, setDescription] = useState("");
-  const user = JSON.parse(localStorage.getItem("user"));
-  const initialLatter = user?.fullname?.charAt(0).toUpperCase();
+  const token = localStorage.getItem("token");
+  let decode = jwtDecode(token);
+  const fname = decode.fullname;
+  const initialLatter = fname.charAt(0).toUpperCase();
   const [branchFilter, setBranchFilter] = useState("");
   const [semesterFilter, setSemesterFilter] = useState("");
   const [activeTab, setActiveTab] = useState("Material");
@@ -672,7 +675,7 @@ const StdDashboard = () => {
                   </div>
 
                   {/* Bottom Section */}
-                   <div className="mt-4 flex justify-between items-end">
+                  <div className="mt-4 flex justify-between items-end">
                     {/* Semester + Branch */}
                     <div className="flex flex-col gap-2">
                       {item.semester_name && (
