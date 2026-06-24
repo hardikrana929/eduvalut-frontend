@@ -46,7 +46,7 @@ const StdDashboard = () => {
   const [search, setSearch] = useState("");
   const [pdfLoading, setPdfLoading] = useState(false);
   const [paperLoading, setPaperLoading] = useState(false);
-  const token = localStorage.getItem("token");
+  
   // PAGINATION
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
