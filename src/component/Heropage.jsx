@@ -14,34 +14,24 @@ const Heropage = () => {
   let decode = jwtDecode(token);
   const role = decode.role;
   useEffect(() => {
-    // const userStr = localStorage.getItem("user");
     const token = localStorage.getItem("token");
 
-    if (token) {
-      try {
-        // const getUser = JSON.parse(userStr);
+    if (!token) {
+      return;
+    }
 
-        // If already logged in, send them straight to their dashboard
-        if (role && role === "student") {
-          navigate("/stdDash", { replace: true });
-        } else if (role && role === "admin") {
-          navigate("/adminDash", { replace: true });
-        }
-      } catch (error) {
-        // If localStorage data is broken, clear it
-        toast.success(error.response?.data?.message, {
-          duration: 3000,
-          position: "bottom-center",
-          style: {
-            border: "1px solid #713200",
-            padding: "16px",
-            color: "#713200",
-          },
-        });
-        localStorage.removeItem("token");
+    try {
+      const decoded = jwtDecode(token);
+
+      if (decoded.role === "student") {
+        navigate("/stdDash", { replace: true });
+      } else if (decoded.role === "admin") {
+        navigate("/adminDash", { replace: true });
       }
-    } else {
-      navigate("/login", { replace: true });
+    } catch (error) {
+      console.log(error);
+
+      localStorage.removeItem("token");
     }
   }, [navigate]);
   return (
