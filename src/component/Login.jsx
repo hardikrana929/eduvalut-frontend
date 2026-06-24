@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaEnvelope, FaLock } from "react-icons/fa";
+import { jwtDecode } from "jwt-decode";
 import { PiStudentBold } from "react-icons/pi";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -12,17 +13,21 @@ const Login = () => {
     password: "",
   });
   const navigate = useNavigate();
-
+  const token = localStorage.getItem("token");
+  let decode = jwtDecode(token);
+  const role = decode.role;
   useEffect(() => {
-    const userStr = localStorage.getItem("user");
-    if (userStr) {
+    // const userStr = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+
+    if (token) {
       try {
-        const getUser = JSON.parse(userStr);
+        // const getUser = JSON.parse(userStr);
 
         // If already logged in, send them straight to their dashboard
-        if (getUser && getUser.role === "student") {
+        if (role && role === "student") {
           navigate("/stdDash", { replace: true });
-        } else if (getUser && getUser.role === "admin") {
+        } else if (role && role === "admin") {
           navigate("/adminDash", { replace: true });
         }
       } catch (error) {
@@ -35,7 +40,7 @@ const Login = () => {
             color: "#713200",
           },
         });
-        localStorage.removeItem("user");
+        localStorage.removeItem("token");
       }
     }
   }, [navigate]);
@@ -82,8 +87,13 @@ const Login = () => {
             //Store token and user in localstorage
             localStorage.setItem("token", res.data.token);
             // localStorage.setItem("user", JSON.stringify(res.data.user));
-            
-            if (res.data.user?.role === "student") {
+
+            // if (res.data.user?.role === "student") {
+            //   navigate("/stdDash", { replace: true });
+            // } else {
+            //   navigate("/adminDash", { replace: true });
+            // }
+            if (role === "student") {
               navigate("/stdDash", { replace: true });
             } else {
               navigate("/adminDash", { replace: true });

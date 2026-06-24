@@ -1,27 +1,44 @@
 import Testimonials from "./Testimonial";
 import WhyChoose from "./WhyChoose";
+import { toast } from "react-hot-toast";
 import Footer from "./Footer";
+import { jwtDecode } from "jwt-decode";
 import Navbar from "./Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 const Heropage = () => {
   const navigate = useNavigate();
 
+  // const userStr = localStorage.getItem("user");
+  const token = localStorage.getItem("token");
+  let decode = jwtDecode(token);
+  const role = decode.role;
   useEffect(() => {
-    const userStr = localStorage.getItem("user");
-    if (userStr) {
+    // const userStr = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+
+    if (token) {
       try {
-        const getUser = JSON.parse(userStr);
+        // const getUser = JSON.parse(userStr);
 
         // If already logged in, send them straight to their dashboard
-        if (getUser && getUser.role === "student") {
+        if (role && role === "student") {
           navigate("/stdDash", { replace: true });
-        } else if (getUser && getUser.role === "admin") {
+        } else if (role && role === "admin") {
           navigate("/adminDash", { replace: true });
         }
       } catch (error) {
         // If localStorage data is broken, clear it
-        localStorage.removeItem("user");
+        toast.success(error.response?.data?.message, {
+          duration: 3000,
+          position: "bottom-center",
+          style: {
+            border: "1px solid #713200",
+            padding: "16px",
+            color: "#713200",
+          },
+        });
+        localStorage.removeItem("token");
       }
     }
   }, [navigate]);
