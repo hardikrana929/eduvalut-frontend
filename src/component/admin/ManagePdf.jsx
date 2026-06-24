@@ -54,7 +54,7 @@ const ManagePdf = () => {
   const currentData = filteredData.slice(firstIndex, lastIndex);
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
-  const localUser = JSON.parse(localStorage.getItem("user")||"null");
+  const localUser = JSON.parse(localStorage.getItem("user") || "null");
   const token = localStorage.getItem("token");
   //Clear Fields
   const clearFields = () => {
@@ -374,7 +374,7 @@ const ManagePdf = () => {
             onChange={(e) => setSearch(e.target.value)}
             className="
               w-full
-              h-[50px]
+              `h-[50px]`
               pl-11 pr-4
               border border-gray-200
               rounded-2xl
@@ -390,8 +390,8 @@ const ManagePdf = () => {
           value={branchFilter}
           onChange={(e) => setBranchFilter(e.target.value)}
           className="
-            h-[50px]
-            min-w-[180px]
+            `h-[50px]`
+            `min-w-[180px]`
             border border-blue-100
             rounded-2xl
             px-4
@@ -413,8 +413,8 @@ const ManagePdf = () => {
           value={semesterFilter}
           onChange={(e) => setSemesterFilter(e.target.value)}
           className="
-            h-[50px]
-            min-w-[180px]
+            `h-[50px]`
+            `min-w-[180px]`
             border border-blue-100
             rounded-2xl
             px-4
