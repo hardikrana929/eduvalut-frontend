@@ -10,15 +10,10 @@ const Heropage = () => {
   const navigate = useNavigate();
 
   // const userStr = localStorage.getItem("user");
-  const token = localStorage.getItem("token");
-  let decode = jwtDecode(token);
-  const role = decode.role;
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    if (!token) {
-      return;
-    }
+    if (!token) return;
 
     try {
       const decoded = jwtDecode(token);
@@ -29,8 +24,6 @@ const Heropage = () => {
         navigate("/adminDash", { replace: true });
       }
     } catch (error) {
-      console.log(error);
-
       localStorage.removeItem("token");
     }
   }, [navigate]);
