@@ -406,14 +406,14 @@ const StdDashboard = () => {
                     font-bold text-lg
                   "
             >
-              {initialLatter}
+              {initialLetter}
             </div>
 
             {/* USER INFO */}
             {open && (
               <div>
                 <h3 className="font-semibold text-gray-800">
-                  {user?.fullname || user?.username}
+                  {initialLetter?.fullname || initialLetter?.username}
                 </h3>
 
                 <p className="text-xs text-gray-500">Student</p>
