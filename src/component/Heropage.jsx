@@ -40,6 +40,8 @@ const Heropage = () => {
         });
         localStorage.removeItem("token");
       }
+    } else {
+      navigate("/login", { replace: true });
     }
   }, [navigate]);
   return (
