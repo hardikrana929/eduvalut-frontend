@@ -32,10 +32,6 @@ const StdDashboard = () => {
   const [openFeedback, setOpenFeedback] = useState(false);
   const [rating, setRating] = useState(0);
   const [description, setDescription] = useState("");
-  const token = localStorage.getItem("token");
-  let decode = jwtDecode(token);
-  const fname = decode.fullname;
-  const initialLatter = fname.charAt(0).toUpperCase();
   const [branchFilter, setBranchFilter] = useState("");
   const [semesterFilter, setSemesterFilter] = useState("");
   const [activeTab, setActiveTab] = useState("Material");
@@ -46,7 +42,20 @@ const StdDashboard = () => {
   const [search, setSearch] = useState("");
   const [pdfLoading, setPdfLoading] = useState(false);
   const [paperLoading, setPaperLoading] = useState(false);
-  
+
+  const token = localStorage.getItem("token");
+
+  let initialLetter = "?";
+
+  if (token) {
+    try {
+      const decoded = jwtDecode(token);
+
+      initialLetter = decoded.fullname?.charAt(0).toUpperCase();
+    } catch (error) {
+      console.log(error);
+    }
+  }
   // PAGINATION
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
