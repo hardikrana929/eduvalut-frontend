@@ -33,7 +33,6 @@ const Signup = () => {
   const navigate = useNavigate();
   //signup API call
   const handleSubmit = async (e) => {
-    setIsLoading(true);
     e.preventDefault();
 
     if (!formData.fullname || !formData.email || !formData.password) {
@@ -61,6 +60,7 @@ const Signup = () => {
       return;
     }
     try {
+      setIsLoading(true);
       const res = await axios.post(
         "https://eduvalut-backend.vercel.app/api/student/signup-student",
         {
@@ -199,7 +199,8 @@ const Signup = () => {
           {/* Button */}
           <button
             type="submit"
-            className="cursor-pointer w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-medium shadow-md transition-all duration-300"
+            disabled={isLoading}
+            className="cursor-pointer w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-medium shadow-md transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
           >
             {isLoading ? (
               <BeatLoader size={10} color="#ffffff" />
