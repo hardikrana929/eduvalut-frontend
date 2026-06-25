@@ -104,6 +104,7 @@ const ManagePaper = () => {
       });
       return;
     }
+
     //Check file type
     if (paper.type !== "application/pdf") {
       toast.error("Only paper files are allowed.", {
@@ -118,6 +119,7 @@ const ManagePaper = () => {
       return;
     }
     try {
+      //Form validation
       if (!subjectName || !year || !semesterId || !branchId || !paper) {
         toast.error("All fields are require.", {
           duration: 3000,
@@ -228,7 +230,26 @@ const ManagePaper = () => {
 
     try {
       setUploadLoading(true);
-
+      //Form validation
+      if (
+        !subjectName ||
+        !year ||
+        !semesterId ||
+        !branchId ||
+        !paper ||
+        !uploadedBy
+      ) {
+        toast.error("All fields are require.", {
+          duration: 3000,
+          position: "top-center",
+          style: {
+            border: "1px solid #713200",
+            padding: "10px",
+            color: "#713200",
+          },
+        });
+        return;
+      }
       const data = {
         subjectName,
         semesterId,

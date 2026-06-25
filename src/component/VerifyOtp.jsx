@@ -36,6 +36,18 @@ const VerifyOtp = () => {
     e.preventDefault();
     setLoading(true);
     try {
+      if(!otp){
+        toast.error("OTP is require.", {
+          duration: 3000,
+          position: "top-center",
+          style: {
+            border: "1px solid #713200",
+            padding: "10px",
+            color: "#713200",
+          },
+        });
+        return;
+      }
       const email = localStorage.getItem("emailVerify");
       if (timer === 0) {
         alert("OTP Expired");

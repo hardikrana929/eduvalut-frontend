@@ -134,6 +134,7 @@ const Signup = () => {
                 value={formData.fullname}
                 onChange={handleChange}
                 className="w-full px-3 py-3 outline-none bg-transparent"
+                required
               />
             </div>
           </div>
@@ -154,6 +155,7 @@ const Signup = () => {
                 value={formData.email}
                 onChange={handleChange}
                 className="w-full px-3 py-3 outline-none bg-transparent"
+                required
               />
             </div>
           </div>
@@ -174,6 +176,7 @@ const Signup = () => {
                 value={formData.password}
                 onChange={handleChange}
                 className="w-full px-3 py-3 outline-none bg-transparent"
+                required
               />
             </div>
           </div>

@@ -46,6 +46,18 @@ const Login = () => {
     setIsLoading(true);
     e.preventDefault();
     try {
+      if (!formData.password || !formData.email) {
+        toast.error("E-mail and Password are require.", {
+          duration: 3000,
+          position: "top-center",
+          style: {
+            border: "1px solid #713200",
+            padding: "10px",
+            color: "#713200",
+          },
+        });
+        return;
+      }
       if (formData.password.length < 8) {
         toast.error("Password must greater or equal 8 charecters.", {
           duration: 3000,

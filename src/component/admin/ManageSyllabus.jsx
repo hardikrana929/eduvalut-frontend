@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaRegEdit, FaDownload, FaFilePdf } from "react-icons/fa";
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
@@ -54,7 +54,7 @@ const ManageSyllabus = () => {
   const [uploadedBy, setUploadedBy] = useState("");
   const [pdf, setPdf] = useState("");
   const [syllabusType, setSyllabusType] = useState("");
-  
+
   const token = localStorage.getItem("token");
   let decoded = "?";
   if (token) {
@@ -243,7 +243,18 @@ const ManageSyllabus = () => {
       formData.append("branchId", branchId);
       formData.append("uploadedBy", decoded.id);
       formData.append("syllabusType", syllabusType);
-
+      if (!title || !semesterId || !branchId) {
+        toast.error("All fields are require.", {
+          duration: 3000,
+          position: "top-center",
+          style: {
+            border: "1px solid #713200",
+            padding: "10px",
+            color: "#713200",
+          },
+        });
+        return;
+      }
       if (pdf) {
         formData.append("pdf", pdf);
       }

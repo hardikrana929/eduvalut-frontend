@@ -139,6 +139,18 @@ const StdDashboard = () => {
         rating: rating,
         message: description,
       };
+      if (!newObj.message) {
+        toast.error("Message is require.", {
+          duration: 3000,
+          position: "top-center",
+          style: {
+            border: "1px solid #713200",
+            padding: "10px",
+            color: "#713200",
+          },
+        });
+        return;
+      }
       const options = {
         headers: {
           Authorization: `Bearer ${token}`,
