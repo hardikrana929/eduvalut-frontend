@@ -132,9 +132,10 @@ const StdDashboard = () => {
   const sendFeedBack = async () => {
     try {
       setPdfLoading(true);
-      const localUser = JSON.parse(localStorage.getItem("user"));
+      const token = localStorage.getItem("token");
+      let decoded = jwtDecode(token);
       const newObj = {
-        userId: localUser.id,
+        userId: decoded.id,
         rating: rating,
         message: description,
       };
