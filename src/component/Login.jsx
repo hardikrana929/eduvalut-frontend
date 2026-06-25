@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { jwtDecode } from "jwt-decode";
 import { PiStudentBold } from "react-icons/pi";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaRegEye, FaRegEyeSlash, FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isShow, setIsShow] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -132,7 +133,7 @@ const Login = () => {
           className="flex items-center gap-2 mb-6 text-blue-600 cursor-pointer hover:text-blue-800 transition-all"
         >
           <FaArrowLeft size={18} />
-          <span className="font-medium">Back to Dashboard</span>
+          <span className="font-medium">Back to Home</span>
         </div>
         {/* Logo */}
         <div className="flex flex-col items-center">
@@ -182,7 +183,7 @@ const Login = () => {
               <FaLock className="text-gray-400" />
 
               <input
-                type="password"
+                type={isShow ? "text" : "password"}
                 name="password"
                 placeholder="Enter your password"
                 value={formData.password}
@@ -190,6 +191,13 @@ const Login = () => {
                 className="w-full px-3 py-3 outline-none bg-transparent"
                 required
               />
+              <button
+                type="button"
+                onClick={() => setIsShow(!isShow)}
+                className="text-gray-400 hover:text-blue-600 cursor-pointer"
+              >
+                {isShow ? <FaRegEyeSlash size={18} /> : <FaRegEye size={18} />}
+              </button>
             </div>
           </div>
 

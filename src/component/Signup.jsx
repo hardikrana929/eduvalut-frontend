@@ -99,7 +99,7 @@ const Signup = () => {
           className="flex items-center gap-2 mb-6 text-blue-600 cursor-pointer hover:text-blue-800 transition-all"
         >
           <FaArrowLeft size={18} />
-          <span className="font-medium">Back to Dashboard</span>
+          <span className="font-medium">Back to Home</span>
         </div>
         {/* Logo */}
         <div className="flex flex-col items-center">
