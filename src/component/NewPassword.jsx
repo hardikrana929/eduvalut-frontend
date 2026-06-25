@@ -160,7 +160,7 @@ const NewPassword = () => {
               />
               <button
                 type="button"
-                onClick={() => isShowPassConf(!isShowPassConf)}
+                onClick={() => setIsShowPassConf(!isShowPassConf)}
                 className="text-gray-400 hover:text-blue-600 cursor-pointer"
               >
                 {isShowPassConf ? (
