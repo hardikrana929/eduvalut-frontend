@@ -2,6 +2,7 @@ import "./App.css";
 import Heropage from "./component/Heropage";
 import Signup from "./component/Signup";
 import Login from "./component/Login";
+import NotFound from "./component/NotFound";
 import { Routes, Route } from "react-router-dom";
 import ForgotPassword from "./component/ForgotPassword";
 import VerifyOtp from "./component/VerifyOtp";
@@ -26,6 +27,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/verifyotp" element={<VerifyOtp />} />
         <Route path="/newPassword" element={<NewPassword />} />
+        <Route path="*" element={<NotFound />} />
         {/* <Route
           path="/verifyotp"
           element={
