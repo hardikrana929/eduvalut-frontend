@@ -73,7 +73,7 @@ import { jwtDecode } from "jwt-decode";
 
 export const ProtectedRouter = ({ children, authAccess }) => {
   const token = localStorage.getItem("token");
-  console.log(jwtDecode(token));
+
   if (!token) {
     return <Navigate to="/login" replace />;
   }
@@ -101,7 +101,7 @@ export const ProtectedRouter = ({ children, authAccess }) => {
 export const AuthRouter = ({ children }) => {
   const token = localStorage.getItem("token");
 
-  console.log(jwtDecode(token));
+
 
   if (!token) {
     return <Navigate to="/login" replace />;
