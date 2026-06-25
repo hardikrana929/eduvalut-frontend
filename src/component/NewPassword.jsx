@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MdOutlineSecurity } from "react-icons/md";
 import { PiStudentBold } from "react-icons/pi";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { BeatLoader } from "react-spinners";
@@ -9,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 const NewPassword = () => {
   const [pass, setPass] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
+  const [isShowPass, setIsShowPass] = useState(false);
+  const [isShowPassConf, setIsShowPassConf] = useState(false);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -119,13 +122,24 @@ const NewPassword = () => {
               <MdOutlineSecurity className="text-gray-400" />
 
               <input
-                type="password"
+                type={isShowPass ? "text" : "password"}
                 placeholder="Enter New Password"
                 className="w-full px-3 py-3 outline-none bg-transparent"
                 value={pass}
                 onChange={(e) => setPass(e.target.value)}
                 required
               />
+              <button
+                type="button"
+                onClick={() => setIsShowPass(!isShowPass)}
+                className="text-gray-400 hover:text-blue-600 cursor-pointer"
+              >
+                {isShowPass ? (
+                  <FaRegEyeSlash size={18} />
+                ) : (
+                  <FaRegEye size={18} />
+                )}
+              </button>
             </div>
           </div>
           <div>
@@ -137,13 +151,24 @@ const NewPassword = () => {
               <MdOutlineSecurity className="text-gray-400" />
 
               <input
-                type="password"
+                type={isShowPassConf ? "text" : "password"}
                 placeholder="Enter Confirm Password"
                 className="w-full px-3 py-3 outline-none bg-transparent"
                 value={confirmPass}
                 onChange={(e) => setConfirmPass(e.target.value)}
                 required
               />
+              <button
+                type="button"
+                onClick={() => isShowPassConf(!isShowPassConf)}
+                className="text-gray-400 hover:text-blue-600 cursor-pointer"
+              >
+                {isShowPassConf ? (
+                  <FaRegEyeSlash size={18} />
+                ) : (
+                  <FaRegEye size={18} />
+                )}
+              </button>
             </div>
           </div>
 

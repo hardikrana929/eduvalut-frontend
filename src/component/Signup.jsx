@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { FaArrowLeft, FaUser, FaEnvelope, FaLock } from "react-icons/fa";
+import {
+  FaArrowLeft,
+  FaUser,
+  FaEnvelope,
+  FaLock,
+  FaRegEye,
+  FaRegEyeSlash,
+} from "react-icons/fa";
 import { PiStudentBold } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -9,6 +16,7 @@ import { BeatLoader } from "react-spinners";
 
 const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isShow, setIsShow] = useState(false);
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
@@ -170,7 +178,7 @@ const Signup = () => {
               <FaLock className="text-gray-400" />
 
               <input
-                type="password"
+                type={isShow ? "text" : "password"}
                 name="password"
                 placeholder="Create password"
                 value={formData.password}
@@ -178,6 +186,13 @@ const Signup = () => {
                 className="w-full px-3 py-3 outline-none bg-transparent"
                 required
               />
+              <button
+                type="button"
+                onClick={() => setIsShow(!isShow)}
+                className="text-gray-400 hover:text-blue-600 cursor-pointer"
+              >
+                {isShow ? <FaRegEyeSlash size={18} /> : <FaRegEye size={18} />}
+              </button>
             </div>
           </div>
 
