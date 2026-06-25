@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash,FaStar } from "react-icons/fa";
 import { SkeletonCard } from "../SkeletonCard";
 
 const MangeFeedback = () => {
@@ -69,7 +69,7 @@ const MangeFeedback = () => {
     <div className="max-w-5xl mx-auto mt-5">
       {loading ? (
         [...Array(4)].map((_, index) => <SkeletonCard key={index} />)
-      ) : feedbackList.length > 0 (
+      ) : feedbackList.length > 0 ?(
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {feedbackList.map((feedback) => (
             <div
@@ -123,7 +123,19 @@ const MangeFeedback = () => {
                     font-semibold
                   "
                 >
-                  ⭐ {feedback.rating}/5
+                   <div className="flex items-center gap-1">
+                      {[...Array(5)].map((_, index) => (
+                        <FaStar
+                          key={index}
+                          className={
+                            index < feedback.rating
+                              ? "text-yellow-500"
+                              : "text-gray-300"
+                          }
+                          size={14}
+                        />
+                      ))}
+                    </div>{feedback.rating}/5
                 </div>
               </div>
 
