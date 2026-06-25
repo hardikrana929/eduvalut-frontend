@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaRegEdit, FaDownload, FaFilePdf } from "react-icons/fa";
+import {jwtDecode} from 'jwt-decode';
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
@@ -53,8 +54,24 @@ const ManageSyllabus = () => {
   const [uploadedBy, setUploadedBy] = useState("");
   const [pdf, setPdf] = useState("");
   const [syllabusType, setSyllabusType] = useState("");
-  const localUser = JSON.parse(localStorage.getItem("user"));
+  
   const token = localStorage.getItem("token");
+  let decoded = "?";
+  if (token) {
+    try {
+      decoded = jwtDecode(token);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Opps! Server Error...", {
+        duration: 3000,
+        position: "top-center",
+        style: {
+          border: "1px solid #713200",
+          padding: "10px",
+          color: "#713200",
+        },
+      });
+    }
+  }
   //Clear Fields
   const clearFields = () => {
     setTitle("");
@@ -111,7 +128,7 @@ const ManageSyllabus = () => {
         formData.append("title", title);
         formData.append("semesterId", semesterId);
         formData.append("branchId", branchId);
-        formData.append("uploadedBy", localUser.id);
+        formData.append("uploadedBy", decoded.id);
         formData.append("pdfs", pdf);
         formData.append("syllabusType", "Syllabus");
 
@@ -224,7 +241,7 @@ const ManageSyllabus = () => {
       formData.append("title", title);
       formData.append("semesterId", semesterId);
       formData.append("branchId", branchId);
-      formData.append("uploadedBy", localUser.id);
+      formData.append("uploadedBy", decoded.id);
       formData.append("syllabusType", syllabusType);
 
       if (pdf) {
@@ -803,7 +820,7 @@ const ManageSyllabus = () => {
 
                 <input
                   type="text"
-                  value={localUser.id}
+                  value={decoded.id}
                   onChange={(e) => setUploadedBy(e.target.value)}
                   placeholder="Uploaded by"
                   className="

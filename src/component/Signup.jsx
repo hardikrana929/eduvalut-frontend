@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { FaArrowLeft,FaUser, FaEnvelope, FaLock } from "react-icons/fa";
+import { FaArrowLeft, FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 import { PiStudentBold } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BeatLoader } from "react-spinners";
 
 const Signup = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
@@ -19,9 +21,11 @@ const Signup = () => {
       [e.target.name]: e.target.value,
     });
   };
+
   const navigate = useNavigate();
   //signup API call
   const handleSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
 
     if (!formData.fullname || !formData.email || !formData.password) {
@@ -81,6 +85,8 @@ const Signup = () => {
           color: "#713200",
         },
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -177,7 +183,11 @@ const Signup = () => {
             type="submit"
             className="cursor-pointer w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-medium shadow-md transition-all duration-300"
           >
-            Create Account
+            {isLoading ? (
+              <BeatLoader size={10} color="#ffffff" />
+            ) : (
+              "Create Account"
+            )}
           </button>
         </form>
 

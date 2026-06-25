@@ -2,10 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaTrash } from "react-icons/fa";
+import { SkeletonCard } from "../SkeletonCard";
 
 const MangeFeedback = () => {
   const [feedbackList, setFeedbackList] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   // DELETE FEEDBACK
   const deleteFeedback = async (id) => {
     try {
@@ -34,6 +35,7 @@ const MangeFeedback = () => {
   // GET FEEDBACK
   const getFeedback = async () => {
     try {
+      setLoading(true);
       const token = localStorage.getItem("token");
 
       const options = {
@@ -54,6 +56,8 @@ const MangeFeedback = () => {
         duration: 3000,
         position: "top-center",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -63,9 +67,9 @@ const MangeFeedback = () => {
 
   return (
     <div className="max-w-5xl mx-auto mt-5">
-      {feedbackList.length === 0 ? (
-        <div className="text-center py-10 text-gray-500">No Feedback Found</div>
-      ) : (
+      {loading ? (
+        [...Array(4)].map((_, index) => <SkeletonCard key={index} />)
+      ) : feedbackList.length > 0 (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {feedbackList.map((feedback) => (
             <div

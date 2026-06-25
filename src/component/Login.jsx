@@ -7,7 +7,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { BeatLoader } from "react-spinners";
 const Login = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -41,6 +43,7 @@ const Login = () => {
 
   // Handle Student Login
   const handleSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     try {
       if (formData.password.length < 8) {
@@ -102,6 +105,8 @@ const Login = () => {
           color: "#713200",
         },
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -192,7 +197,7 @@ const Login = () => {
             type="submit"
             className="cursor-pointer w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-medium shadow-md transition-all duration-300"
           >
-            Login
+            {isLoading ? <BeatLoader size={10} color="#ffffff" /> : "Login"}
           </button>
         </form>
 
