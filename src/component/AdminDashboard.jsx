@@ -9,6 +9,8 @@ import ManagePdf from "./admin/ManagePdf";
 import ManagePaper from "./admin/ManagePaper";
 import ManageSyllabus from "./admin/ManageSyllabus";
 import ManageFeedback from "./admin/ManageFeedback";
+import { jwtDecode } from "jwt-decode";
+import { toast } from "react-hot-toast";
 const AdminDashboard = () => {
   const navigate = useNavigate();
 
@@ -16,15 +18,30 @@ const AdminDashboard = () => {
 
   const [activeTab, setActiveTab] = useState("pdf");
 
-  const admin = JSON.parse(localStorage.getItem("user"));
+  const token = localStorage.getItem("token");
 
-  const initialLetter = admin?.fullname?.charAt(0).toUpperCase();
+  let initialLetter = "?";
+  let decoded = "?";
+  if (token) {
+    try {
+      decoded = jwtDecode(token);
+      initialLetter = decoded.fullname.charAt(0).toUpperCase();
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Opps! Server Error...", {
+        duration: 3000,
+        position: "top-center",
+        style: {
+          border: "1px solid #713200",
+          padding: "10px",
+          color: "#713200",
+        },
+      });
+    }
+  }
 
   // Logout
   const logoutAdmin = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
-
     navigate("/login", { replace: true });
   };
 
@@ -191,7 +208,7 @@ const AdminDashboard = () => {
             {open && (
               <div>
                 <h3 className="font-semibold text-gray-800">
-                  {admin?.fullname}
+                  {decoded.fullname}
                 </h3>
 
                 <p className="text-xs text-gray-500">Administrator</p>

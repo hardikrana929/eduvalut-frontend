@@ -46,14 +46,22 @@ const StdDashboard = () => {
   const token = localStorage.getItem("token");
 
   let initialLetter = "?";
-
+  let decoded = "?";
   if (token) {
     try {
-      const decoded = jwtDecode(token);
+      decoded = jwtDecode(token);
 
       initialLetter = decoded.fullname?.charAt(0).toUpperCase();
     } catch (error) {
-      console.log(error);
+      toast.error(error.response?.data?.message || "Opps! Server Error...", {
+        duration: 3000,
+        position: "top-center",
+        style: {
+          border: "1px solid #713200",
+          padding: "10px",
+          color: "#713200",
+        },
+      });
     }
   }
   // PAGINATION
@@ -413,7 +421,7 @@ const StdDashboard = () => {
             {open && (
               <div>
                 <h3 className="font-semibold text-gray-800">
-                  {initialLetter?.fullname || initialLetter?.username}
+                  {decoded.fullname || decoded.role}
                 </h3>
 
                 <p className="text-xs text-gray-500">Student</p>
