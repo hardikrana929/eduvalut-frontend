@@ -8,6 +8,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { SkeletonCard } from "../SkeletonCard";
 import { BeatLoader } from "react-spinners";
+import { jwtDecode } from "jwt-decode";
 const ManagePdf = () => {
   // MODAL
   const [openModal, setOpenModal] = useState(false);
@@ -54,8 +55,24 @@ const ManagePdf = () => {
   const currentData = filteredData.slice(firstIndex, lastIndex);
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
-  const localUser = JSON.parse(localStorage.getItem("user") || "null");
+  // const localUser = JSON.parse(localStorage.getItem("user") || "null");
   const token = localStorage.getItem("token");
+  let decoded = "?";
+  if (token) {
+    try {
+      decoded = jwtDecode(token);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Opps! Server Error...", {
+        duration: 3000,
+        position: "top-center",
+        style: {
+          border: "1px solid #713200",
+          padding: "10px",
+          color: "#713200",
+        },
+      });
+    }
+  }
   //Clear Fields
   const clearFields = () => {
     setTitle("");
@@ -113,7 +130,7 @@ const ManagePdf = () => {
         formData.append("title", title);
         formData.append("semesterId", semesterId);
         formData.append("branchId", branchId);
-        formData.append("uploadedBy", localUser.id);
+        formData.append("uploadedBy", decoded.id);
         formData.append("pdfs", pdf);
         formData.append("syllabusType", "Material");
 
@@ -224,7 +241,7 @@ const ManagePdf = () => {
       formData.append("title", title);
       formData.append("semesterId", semesterId);
       formData.append("branchId", branchId);
-      formData.append("uploadedBy", localUser.id);
+      formData.append("uploadedBy", decoded.id);
       formData.append("syllabusType", syllabusType);
 
       if (pdf) {
@@ -830,7 +847,7 @@ const ManagePdf = () => {
 
                 <input
                   type="text"
-                  value={localUser.id}
+                  value={decoded.id}
                   onChange={(e) => setUploadedBy(e.target.value)}
                   placeholder="Uploaded by"
                   className="
