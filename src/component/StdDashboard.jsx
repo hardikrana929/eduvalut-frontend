@@ -1,7 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
 import { IoClose } from "react-icons/io5";
-import { FaMoon, FaSun } from "react-icons/fa";
-import { useTheme } from "../hooks/useTheme";
 import { jwtDecode } from "jwt-decode";
 import { BeatLoader } from "react-spinners";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
@@ -23,7 +21,6 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const StdDashboard = () => {
-  const { darkMode, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [open, setOpen] = useState(true);
   //Logout feature
@@ -277,29 +274,11 @@ const StdDashboard = () => {
     setCurrentPage(1);
   }, [activeTab, search, branchFilter, semesterFilter]);
   return (
-    <section
-      className="
-    h-screen
-    flex
-    overflow-hidden
-    bg-gradient-to-b
-    from-blue-50
-    to-white
-    dark:from-slate-900
-    dark:to-slate-950
-    dark:text-white
-    transition-colors
-    duration-300
-  "
-    >
+    <section className="h-screen flex bg-gradient-to-b from-blue-50 to-white overflow-hidden">
       {/* SIDEBAR */}
       <aside
         className={`
-          bg-white
-          dark:bg-slate-900
-          border-r
-          border-blue-100
-          dark:border-slate-700
+          bg-white border-r border-blue-100 shadow-sm
           transition-all duration-300
           flex flex-col
           ${open ? "w-[250px]" : "w-[80px]"}
@@ -316,23 +295,15 @@ const StdDashboard = () => {
                 </div>
 
                 <div>
-                  <h1 className="text-lg font-bold text-gray-900 dark:text-white">
-                    EduVault
-                  </h1>
+                  <h1 className="text-lg font-bold text-gray-900">EduVault</h1>
 
-                  <p className="text-xs text-gray-500 dark:text-slate-400">
-                    Student Panel
-                  </p>
+                  <p className="text-xs text-gray-500">Student Panel</p>
                 </div>
               </div>
 
               <button
                 onClick={() => setOpen(false)}
-                className="text-gray-700
-                  dark:text-slate-300
-                  hover:bg-blue-50
-                  dark:hover:bg-slate-800
-                  hover:text-blue-600"
+                className="text-gray-600 hover:text-blue-600 transition-all duration-300"
               >
                 <HiOutlineMenuAlt3 size={24} />
               </button>
@@ -341,11 +312,7 @@ const StdDashboard = () => {
             /* CLOSE SIDEBAR */
             <button
               onClick={() => setOpen(true)}
-              className="text-gray-700
-                dark:text-slate-300
-                hover:bg-blue-50
-                dark:hover:bg-slate-800
-                hover:text-blue-600"
+              className="text-gray-600 hover:text-blue-600 transition-all duration-300"
             >
               <HiOutlineMenuAlt3 size={24} />
             </button>
@@ -446,8 +413,7 @@ const StdDashboard = () => {
             className="
               flex items-center gap-3
               px-3 py-3              
-             bg-blue-50
-            dark:bg-slate-800
+              bg-blue-50
             "
           >
             {/* PROFILE LETTER */}
@@ -467,34 +433,13 @@ const StdDashboard = () => {
             {/* USER INFO */}
             {open && (
               <div>
-                <h3 className="font-semibold text-gray-800 dark:text-white">
+                <h3 className="font-semibold text-gray-800">
                   {decoded.fullname || decoded.role}
                 </h3>
 
-                <p className="text-xs text-gray-500dark:text-slate-400">
-                  Student
-                </p>
+                <p className="text-xs text-gray-500">Student</p>
               </div>
             )}
-            {/* Light and Dark mode */}
-            <button
-              onClick={toggleTheme}
-              className="
-                p-3
-                rounded-xl
-                bg-gray-100
-                dark:bg-slate-700
-                hover:scale-105
-                transition-all
-                duration-300
-              "
-            >
-              {darkMode ? (
-                <FaSun className="text-yellow-400 text-xl" />
-              ) : (
-                <FaMoon className="text-slate-700 text-xl" />
-              )}
-            </button>
           </div>
         </div>
         {/* LOGOUT */}
@@ -524,13 +469,7 @@ const StdDashboard = () => {
         {/* TOP CARDS */}
         <div className="grid grid-cols-1 sm:grid-cols-1 xl:grid-cols-3 gap-4">
           {/* CARD 1 */}
-          <div
-            className="bg-blue-50
-            dark:bg-slate-800
-            border
-            border-blue-100
-            dark:border-slate-700 rounded-3xl p-6"
-          >
+          <div className="bg-blue-50 border border-blue-100 rounded-3xl p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-500">PDFs</p>
@@ -550,7 +489,7 @@ const StdDashboard = () => {
           </div>
 
           {/* CARD 2 */}
-          <div className="bg-green-50 dark:bg-slate-800 border border-green-100 rounded-3xl p-6">
+          <div className="bg-green-50 border border-green-100 rounded-3xl p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-500">Papers</p>
@@ -567,7 +506,7 @@ const StdDashboard = () => {
           </div>
 
           {/* CARD 3 */}
-          <div className="bg-purple-50 dark:bg-slate-800 border border-purple-100 rounded-3xl p-6">
+          <div className="bg-purple-50 border border-purple-100 rounded-3xl p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-500">Syllabus</p>
@@ -590,7 +529,7 @@ const StdDashboard = () => {
         <div className="flex flex-col md:flex-row gap-3 mt-4">
           {/* SEARCH */}
           <div className="flex-1 relative">
-            <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm dark:text-white" />
+            <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
 
             <input
               type="text"
@@ -602,14 +541,10 @@ const StdDashboard = () => {
               h-[50px]
               pl-11 pr-4
               border border-gray-200
-              dark:border-slate-700
               rounded-2xl
               outline-none
               focus:border-blue-400
-              placeholder:text-gray-400
-            dark:placeholder:text-slate-500
               text-sm
-              dark:text-white
             "
             />
           </div>
@@ -619,19 +554,16 @@ const StdDashboard = () => {
             value={branchFilter}
             onChange={(e) => setBranchFilter(e.target.value)}
             className="
-              h-[50px]
-              min-w-[180px]
-              border border-blue-100
-              rounded-2xl
-              px-4
-              outline-none
-             bg-white
-            dark:bg-slate-800
-            text-gray-700
-            dark:text-white
-            border-blue-100
-            dark:border-slate-700
-                        "
+    h-[50px]
+    min-w-[180px]
+    border border-blue-100
+    rounded-2xl
+    px-4
+    outline-none
+    bg-white
+    text-gray-700
+    focus:border-blue-400
+  "
           >
             <option value="">All Branches</option>
 
@@ -692,12 +624,12 @@ const StdDashboard = () => {
               </div>
 
               {/* TITLE */}
-              <h2 className="text-2xl font-bold text-gray-700 dark:text-white mt-6">
+              <h2 className="text-2xl font-bold text-gray-700 mt-6">
                 No Resources Found
               </h2>
 
               {/* DESCRIPTION */}
-              <p className="text-gray-500 dark:text-slate-400 mt-2 text-center max-w-md">
+              <p className="text-gray-500 mt-2 text-center max-w-md">
                 We couldn't find any PDFs, papers, or syllabus matching your
                 search.
               </p>
@@ -725,10 +657,7 @@ const StdDashboard = () => {
                   className="
                     h-full
                     bg-white
-                  dark:bg-slate-800
-                  border-blue-100
-                  dark:border-slate-700
-                    border
+                    border border-blue-100
                     rounded-3xl
                     p-5
                     shadow-sm
@@ -764,7 +693,6 @@ const StdDashboard = () => {
                       <h3
                         className="
                         text-gray-800
-                        dark:text-white
                         font-semibold
                         text-base
                         leading-6
@@ -800,7 +728,6 @@ const StdDashboard = () => {
                         <span
                           className="
                             bg-purple-50
-                            dark:bg-slate-800
                             text-purple-600
                             text-xs
                             font-medium
@@ -847,14 +774,13 @@ const StdDashboard = () => {
         {/* PAGINATION */}
         {filteredData.length > 0 && (
           <div
-            className="      
+            className="
+      
             left-0
             bg-white/90
-            dark:bg-slate-900
             backdrop-blur-md
             border-t
             border-blue-100
-            dark:border-slate-700
             mt-6
             py-4
             flex
@@ -869,12 +795,11 @@ const StdDashboard = () => {
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((prev) => prev - 1)}
               className="
-                px-4 py-2
-                rounded-lg
-                border
-                bg-white
-                 dark:bg-slate-900
-                disabled:opacity-40
+        px-4 py-2
+        rounded-lg
+        border
+        bg-white
+        disabled:opacity-40
       "
             >
               Prev
@@ -893,12 +818,11 @@ const StdDashboard = () => {
             rounded-lg
             border
             text-sm
-            dark:text-white
 
             ${
               currentPage === page
                 ? "bg-blue-600 text-white border-blue-600"
-                : "bg-white text-gray-700 dark:text-white"
+                : "bg-white text-gray-700"
             }
           `}
                 >
@@ -916,7 +840,6 @@ const StdDashboard = () => {
         rounded-lg
         border
         bg-white
-        dark:bg-slate-900
         disabled:opacity-40
       "
             >
@@ -938,7 +861,6 @@ const StdDashboard = () => {
             <div
               className="
                 bg-white
-                dark:bg-slate-900
                 w-full
                 max-w-md
                 rounded-3xl
@@ -948,7 +870,7 @@ const StdDashboard = () => {
             >
               {/* HEADER */}
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-gray-800 dark:text-white flex items-center gap-4">
+                <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-4">
                   <FaCommentDots className="text-3xl" /> Feedback
                 </h2>
 
@@ -962,9 +884,7 @@ const StdDashboard = () => {
 
               {/* RATING */}
               <div className="mt-6">
-                <p className="text-sm dark:text-white font-medium text-gray-700 dark:text-slate-300 mb-3">
-                  Rating
-                </p>
+                <p className="text-sm font-medium text-gray-700 mb-3">Rating</p>
 
                 <div className="flex gap-2">
                   {[1, 2, 3, 4, 5].map((star) => (
@@ -985,7 +905,7 @@ const StdDashboard = () => {
 
               {/* DESCRIPTION */}
               <div className="mt-6">
-                <p className="text-sm dark:text-white font-medium text-gray-700 mb-3">
+                <p className="text-sm font-medium text-gray-700 mb-3">
                   Description
                 </p>
 
@@ -997,16 +917,12 @@ const StdDashboard = () => {
                   className="
                     w-full
                     border border-gray-200
-                    dark:border-slate-700
-                  dark:bg-slate-800
-                  dark:text-white
                     rounded-2xl
                     p-4
                     outline-none
                     resize-none
                     focus:border-blue-400
                     text-sm
-                    
                   "
                 />
               </div>
