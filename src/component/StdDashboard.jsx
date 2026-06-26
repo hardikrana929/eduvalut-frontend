@@ -476,11 +476,10 @@ const StdDashboard = () => {
                 </p>
               </div>
             )}
-          </div>
-          {/* Light and Dark mode */}
-          <button
-            onClick={toggleTheme}
-            className="
+            {/* Light and Dark mode */}
+            <button
+              onClick={toggleTheme}
+              className="
                 p-3
                 rounded-xl
                 bg-gray-100
@@ -489,13 +488,14 @@ const StdDashboard = () => {
                 transition-all
                 duration-300
               "
-          >
-            {darkMode ? (
-              <FaSun className="text-yellow-400 text-xl" />
-            ) : (
-              <FaMoon className="text-slate-700 text-xl" />
-            )}
-          </button>
+            >
+              {darkMode ? (
+                <FaSun className="text-yellow-400 text-xl" />
+              ) : (
+                <FaMoon className="text-slate-700 text-xl" />
+              )}
+            </button>
+          </div>
         </div>
         {/* LOGOUT */}
         <div className="p-3 border-t border-blue-100">
