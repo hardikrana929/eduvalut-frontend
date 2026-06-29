@@ -72,25 +72,12 @@
 // };
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-
+import SessionLoader from "../component/SessionLoader";
 export const ProtectedRouter = ({ children, authAccess }) => {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "100vh",
-        }}
-      >
-        <p style={{ color: "var(--text-muted)", fontSize: "14px" }}>
-          Verifying session...
-        </p>
-      </div>
-    );
+    return <SessionLoader />;
   }
 
   if (!user) {
@@ -113,20 +100,7 @@ export const AuthRouter = ({ children }) => {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "100vh",
-        }}
-      >
-        <p style={{ color: "var(--text-muted)", fontSize: "14px" }}>
-          Verifying session...
-        </p>
-      </div>
-    );
+    return <SessionLoader />;
   }
 
   if (!user) return <Navigate to="/login" replace />;
