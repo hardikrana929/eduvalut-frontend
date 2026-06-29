@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { FaRegEdit, FaDownload, FaFilePdf } from "react-icons/fa";
-import { jwtDecode } from "jwt-decode";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
@@ -55,23 +54,8 @@ const ManageSyllabus = () => {
   const [pdf, setPdf] = useState("");
   const [syllabusType, setSyllabusType] = useState("");
 
-  const token = localStorage.getItem("token");
-  let decoded = "?";
-  if (token) {
-    try {
-      decoded = jwtDecode(token);
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Opps! Server Error...", {
-        duration: 3000,
-        position: "top-center",
-        style: {
-          border: "1px solid #713200",
-          padding: "10px",
-          color: "#713200",
-        },
-      });
-    }
-  }
+  const decoded = JSON.parse(localStorage.getItem("user")) || {};
+
   //Clear Fields
   const clearFields = () => {
     setTitle("");
@@ -132,12 +116,12 @@ const ManageSyllabus = () => {
         formData.append("pdfs", pdf);
         formData.append("syllabusType", "Syllabus");
 
-        const options = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        };
+        // const options = {
+        //   headers: {
+        //     Authorization: `Bearer ${token}`,
+        //     "Content-Type": "multipart/form-data",
+        //   },
+        // };
         if (syllabusType === "Syllabus") {
           toast.error("Only Material is Allowe", {
             duration: 3000,
@@ -152,7 +136,7 @@ const ManageSyllabus = () => {
           const result = await axios.post(
             "https://eduvalut-backend.vercel.app/api/pdf/addPdf",
             formData,
-            options,
+            { withCredentials: true },
           );
           toast.success("Pdf added successfully.", {
             duration: 3000,
@@ -186,14 +170,14 @@ const ManageSyllabus = () => {
     try {
       setPdfLoading(true);
 
-      const options = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
+      // const options = {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // };
       const result = await axios.get(
         "https://eduvalut-backend.vercel.app/api/pdf/getPdfs",
-        options,
+        { withCredentials: true },
       );
 
       const onlySyllabus = result.data.data.filter(
@@ -258,17 +242,17 @@ const ManageSyllabus = () => {
       if (pdf) {
         formData.append("pdf", pdf);
       }
-      const options = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      };
+      // const options = {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //     "Content-Type": "multipart/form-data",
+      //   },
+      // };
 
       await axios.put(
         `https://eduvalut-backend.vercel.app/api/pdf/updatePdf/${editId}`,
         formData,
-        options,
+        { withCredentials: true },
       );
 
       toast.success("PDF updated successfully");
@@ -287,16 +271,16 @@ const ManageSyllabus = () => {
   //Delete Pdfs
   const deleteMaterialPdf = async (id) => {
     try {
-      const options = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
+      // const options = {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // };
       let sure = confirm("Are you sure you went to delete.");
       if (sure) {
         await axios.delete(
           `https://eduvalut-backend.vercel.app/api/pdf/deletePdf/${id}`,
-          options,
+          { withCredentials: true },
         );
         toast.success("Pdf Deleted successfully.");
         getPdfData();
@@ -309,14 +293,14 @@ const ManageSyllabus = () => {
   //GET Branch
   const getBranchData = async () => {
     try {
-      const options = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
+      // const options = {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // };
       const result = await axios.get(
         "https://eduvalut-backend.vercel.app/api/branch/getBranch",
-        options,
+        { withCredentials: true },
       );
 
       setBranches(result.data.data);
@@ -328,14 +312,14 @@ const ManageSyllabus = () => {
   //GET Semester
   const getSemesterData = async () => {
     try {
-      const options = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
+      // const options = {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // };
       const result = await axios.get(
         "https://eduvalut-backend.vercel.app/api/semester/getSemester",
-        options,
+        { withCredentials: true },
       );
 
       setSemesters(result.data.data);

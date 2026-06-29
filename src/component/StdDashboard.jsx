@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
 import { IoClose } from "react-icons/io5";
-import { jwtDecode } from "jwt-decode";
 import { BeatLoader } from "react-spinners";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
@@ -24,8 +23,12 @@ const StdDashboard = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(true);
   //Logout feature
-  const logoutStd = () => {
-    localStorage.removeItem("token");
+  const logoutStd = async () => {
+    await axios.post(
+      "https://eduvalut-backend.vercel.app/api/student/logout",
+      {},
+      { withCredentials: true },
+    );
     localStorage.removeItem("user");
     navigate("/login", { replace: true });
   };
@@ -43,27 +46,9 @@ const StdDashboard = () => {
   const [pdfLoading, setPdfLoading] = useState(false);
   const [paperLoading, setPaperLoading] = useState(false);
 
-  const token = localStorage.getItem("token");
+  const decoded = JSON.parse(localStorage.getItem("user")) || {};
+  const initialLetter = decoded.fullname?.charAt(0).toUpperCase() || "?";
 
-  let initialLetter = "?";
-  let decoded = "?";
-  if (token) {
-    try {
-      decoded = jwtDecode(token);
-
-      initialLetter = decoded.fullname?.charAt(0).toUpperCase();
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Opps! Server Error...", {
-        duration: 3000,
-        position: "top-center",
-        style: {
-          border: "1px solid #713200",
-          padding: "10px",
-          color: "#713200",
-        },
-      });
-    }
-  }
   // PAGINATION
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
@@ -104,14 +89,14 @@ const StdDashboard = () => {
     try {
       setPdfLoading(true);
 
-      const options = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
+      // const options = {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // };
       const result = await axios.get(
         "https://eduvalut-backend.vercel.app/api/pdf/getPdfs",
-        options,
+        { withCredentials: true },
       );
       setPdfList(result.data.data);
     } catch (error) {
@@ -132,10 +117,10 @@ const StdDashboard = () => {
   const sendFeedBack = async () => {
     try {
       setPdfLoading(true);
-      const token = localStorage.getItem("token");
-      let decoded = jwtDecode(token);
+      const user = JSON.parse(localStorage.getItem("user"));
+
       const newObj = {
-        userId: decoded.id,
+        userId: user.id,
         rating: rating,
         message: description,
       };
@@ -151,16 +136,16 @@ const StdDashboard = () => {
         });
         return;
       }
-      const options = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      };
+      // const options = {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //     "Content-Type": "application/json",
+      //   },
+      // };
       await axios.post(
         "https://eduvalut-backend.vercel.app/api/feedback/addFeedback",
         newObj,
-        options,
+        { withCredentials: true },
       );
       toast.success("Feedback added successfully.", {
         duration: 3000,
@@ -193,14 +178,14 @@ const StdDashboard = () => {
   const getPaperData = useCallback(async () => {
     try {
       setPaperLoading(true);
-      const options = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
+      // const options = {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // };
       const result = await axios.get(
         "https://eduvalut-backend.vercel.app/api/paper/getPaper",
-        options,
+        { withCredentials: true },
       );
       setPaperList(result.data.data);
     } catch (error) {
@@ -220,14 +205,14 @@ const StdDashboard = () => {
   //Get Branch
   const getBranchData = useCallback(async () => {
     try {
-      const options = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
+      // const options = {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // };
       const result = await axios.get(
         "https://eduvalut-backend.vercel.app/api/branch/getBranch",
-        options,
+        { withCredentials: true },
       );
 
       setBranches(result.data.data);
@@ -246,14 +231,14 @@ const StdDashboard = () => {
   //GET Semester
   const getSemesterData = useCallback(async () => {
     try {
-      const options = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
+      // const options = {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // };
       const result = await axios.get(
         "https://eduvalut-backend.vercel.app/api/semester/getSemester",
-        options,
+        { withCredentials: true },
       );
 
       setSemesters(result.data.data);

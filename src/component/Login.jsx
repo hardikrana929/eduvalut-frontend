@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { FaEnvelope, FaLock } from "react-icons/fa";
-import { jwtDecode } from "jwt-decode";
 import { PiStudentBold } from "react-icons/pi";
 import { FaRegEye, FaRegEyeSlash, FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -17,22 +16,10 @@ const Login = () => {
   });
   const navigate = useNavigate();
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (!token) return;
-
-    try {
-      const decoded = jwtDecode(token);
-
-      if (decoded.role === "student") {
-        navigate("/stdDash", { replace: true });
-      } else if (decoded.role === "admin") {
-        navigate("/adminDash", { replace: true });
-      }
-    } catch (error) {
-      console.error(error);
-      localStorage.removeItem("token");
-    }
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) return;
+    if (user.role === "student") navigate("/stdDash", { replace: true });
+    else if (user.role === "admin") navigate("/adminDash", { replace: true });
   }, [navigate]);
   // Handle Input Change
   const handleChange = (e) => {
@@ -87,15 +74,12 @@ const Login = () => {
                 color: "#713200",
               },
             });
-            //Store token and user in localstorage
+            // BEFORE — stored the raw token
             localStorage.setItem("token", res.data.token);
-            // localStorage.setItem("user", JSON.stringify(res.data.user));
 
-            // if (res.data.user?.role === "student") {
-            //   navigate("/stdDash", { replace: true });
-            // } else {
-            //   navigate("/adminDash", { replace: true });
-            // }
+            // AFTER — cookie is set automatically by backend; store only user info for display
+            localStorage.setItem("user", JSON.stringify(res.data.user));
+
             if (res.data.user.role === "student") {
               navigate("/stdDash", { replace: true });
             } else {

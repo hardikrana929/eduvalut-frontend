@@ -9,8 +9,7 @@ import ManagePdf from "./admin/ManagePdf";
 import ManagePaper from "./admin/ManagePaper";
 import ManageSyllabus from "./admin/ManageSyllabus";
 import ManageFeedback from "./admin/ManageFeedback";
-import { jwtDecode } from "jwt-decode";
-import { toast } from "react-hot-toast";
+import axios from "axios";
 const AdminDashboard = () => {
   const navigate = useNavigate();
 
@@ -18,30 +17,17 @@ const AdminDashboard = () => {
 
   const [activeTab, setActiveTab] = useState("pdf");
 
-  const token = localStorage.getItem("token");
-
-  let initialLetter = "?";
-  let decoded = "?";
-  if (token) {
-    try {
-      decoded = jwtDecode(token);
-      initialLetter = decoded.fullname.charAt(0).toUpperCase();
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Opps! Server Error...", {
-        duration: 3000,
-        position: "top-center",
-        style: {
-          border: "1px solid #713200",
-          padding: "10px",
-          color: "#713200",
-        },
-      });
-    }
-  }
+  const decoded = JSON.parse(localStorage.getItem("user")) || {};
+  const initialLetter = decoded.fullname?.charAt(0).toUpperCase() || "?";
 
   // Logout
-  const logoutAdmin = () => {
-    localStorage.removeItem("token");
+  const logoutAdmin = async () => {
+    await axios.post(
+      "https://eduvalut-backend.vercel.app/api/student/logout",
+      {},
+      { withCredentials: true },
+    );
+    localStorage.removeItem("user");
     navigate("/login", { replace: true });
   };
 

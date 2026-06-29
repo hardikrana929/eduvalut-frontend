@@ -10,19 +10,17 @@ const MangeFeedback = () => {
   // DELETE FEEDBACK
   const deleteFeedback = async (id) => {
     try {
-      const token = localStorage.getItem("token");
-
-      const options = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
+      // const options = {
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // };
       let sure = confirm("Are you sure you went to delete.");
       if (sure) {
         const deleteData = await axios.delete(
           `https://eduvalut-backend.vercel.app/api/feedback/deleteFeedback/${id}`,
-          options,
+          { withCredentials: true },
         );
         toast.success(deleteData.data.message || "Feedback Deleted");
         setFeedbackList((prev) => prev.filter((item) => item.id !== id));
@@ -36,18 +34,17 @@ const MangeFeedback = () => {
   const getFeedback = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem("token");
 
-      const options = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
+      // const options = {
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // };
 
       const getData = await axios.get(
         "https://eduvalut-backend.vercel.app/api/feedback/getFeedback",
-        options,
+        { withCredentials: true },
       );
 
       setFeedbackList(getData.data.data || []);
