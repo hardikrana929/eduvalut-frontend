@@ -18,10 +18,12 @@ import { SkeletonCard } from "./SkeletonCard";
 import { PiStudentBold } from "react-icons/pi";
 import axios from "axios";
 import toast from "react-hot-toast";
-
+import { useAuth } from "../hooks/useAuth";
 const StdDashboard = () => {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(true);
+
   //Logout feature
   const logoutStd = async () => {
     await axios.post(
@@ -47,7 +49,7 @@ const StdDashboard = () => {
   const [paperLoading, setPaperLoading] = useState(false);
 
   const decoded = JSON.parse(localStorage.getItem("user")) || {};
-  const initialLetter = decoded.fullname?.charAt(0).toUpperCase() || "?";
+  const initialLetter = user?.fullname?.charAt(0).toUpperCase() || "?";
 
   // PAGINATION
   const [currentPage, setCurrentPage] = useState(1);
@@ -120,7 +122,7 @@ const StdDashboard = () => {
       const user = JSON.parse(localStorage.getItem("user"));
 
       const newObj = {
-        userId: user.id,
+        userId: user?.id,
         rating: rating,
         message: description,
       };

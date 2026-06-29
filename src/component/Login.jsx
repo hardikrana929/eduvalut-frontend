@@ -74,8 +74,6 @@ const Login = () => {
                 color: "#713200",
               },
             });
-            // BEFORE — stored the raw token
-            localStorage.setItem("token", res.data.token);
 
             // AFTER — cookie is set automatically by backend; store only user info for display
             localStorage.setItem("user", JSON.stringify(res.data.user));

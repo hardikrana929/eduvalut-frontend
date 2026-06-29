@@ -10,7 +10,9 @@ import ManagePaper from "./admin/ManagePaper";
 import ManageSyllabus from "./admin/ManageSyllabus";
 import ManageFeedback from "./admin/ManageFeedback";
 import axios from "axios";
+import { useAuth } from "../hooks/useAuth";
 const AdminDashboard = () => {
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(true);
@@ -18,7 +20,7 @@ const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("pdf");
 
   const decoded = JSON.parse(localStorage.getItem("user")) || {};
-  const initialLetter = decoded.fullname?.charAt(0).toUpperCase() || "?";
+  const initialLetter = user?.fullname?.charAt(0).toUpperCase() || "?";
 
   // Logout
   const logoutAdmin = async () => {

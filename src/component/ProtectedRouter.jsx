@@ -44,10 +44,54 @@
 
 //   return children;
 // };
+// import { Navigate } from "react-router-dom";
+
+// export const ProtectedRouter = ({ children, authAccess }) => {
+//   const user = JSON.parse(localStorage.getItem("user"));
+
+//   if (!user) {
+//     return <Navigate to="/login" replace />;
+//   }
+
+//   if (authAccess && user.role !== authAccess) {
+//     return (
+//       <Navigate
+//         to={user.role === "admin" ? "/adminDash" : "/stdDash"}
+//         replace
+//       />
+//     );
+//   }
+
+//   return children;
+// };
+
+// export const AuthRouter = ({ children }) => {
+//   const user = JSON.parse(localStorage.getItem("user"));
+//   if (!user) return <Navigate to="/login" replace />;
+//   return children;
+// };
 import { Navigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 export const ProtectedRouter = ({ children, authAccess }) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+        }}
+      >
+        <p style={{ color: "var(--text-muted)", fontSize: "14px" }}>
+          Verifying session...
+        </p>
+      </div>
+    );
+  }
 
   if (!user) {
     return <Navigate to="/login" replace />;
@@ -66,7 +110,25 @@ export const ProtectedRouter = ({ children, authAccess }) => {
 };
 
 export const AuthRouter = ({ children }) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+        }}
+      >
+        <p style={{ color: "var(--text-muted)", fontSize: "14px" }}>
+          Verifying session...
+        </p>
+      </div>
+    );
+  }
+
   if (!user) return <Navigate to="/login" replace />;
   return children;
 };
