@@ -10,7 +10,7 @@ const Heropage = () => {
 
   // const userStr = localStorage.getItem("user");
   useEffect(() => {
-    const token = localStorage.getItem("user");
+    const token = JSON.parse(localStorage.getItem("user"));
 
     if (!token) return;
 
