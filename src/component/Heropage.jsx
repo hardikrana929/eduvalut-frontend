@@ -1,6 +1,5 @@
 import Testimonials from "./Testimonial";
 import WhyChoose from "./WhyChoose";
-import { toast } from "react-hot-toast";
 import Footer from "./Footer";
 import { jwtDecode } from "jwt-decode";
 import Navbar from "./Navbar";
@@ -11,7 +10,7 @@ const Heropage = () => {
 
   // const userStr = localStorage.getItem("user");
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("user");
 
     if (!token) return;
 
