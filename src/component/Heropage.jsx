@@ -1,31 +1,23 @@
 import Testimonials from "./Testimonial";
 import WhyChoose from "./WhyChoose";
 import Footer from "./Footer";
-import { jwtDecode } from "jwt-decode";
 import Navbar from "./Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 const Heropage = () => {
   const navigate = useNavigate();
 
-  // const userStr = localStorage.getItem("user");
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) return;
 
-    if (!token) return;
-
-    try {
-      const decoded = jwtDecode(token);
-
-      if (decoded.role === "student") {
-        navigate("/stdDash", { replace: true });
-      } else if (decoded.role === "admin") {
-        navigate("/adminDash", { replace: true });
-      }
-    } catch (error) {
-      localStorage.removeItem("token");
+    if (user.role === "student") {
+      navigate("/stdDash", { replace: true });
+    } else if (user.role === "admin") {
+      navigate("/adminDash", { replace: true });
     }
   }, [navigate]);
+
   return (
     <>
       <Navbar />
