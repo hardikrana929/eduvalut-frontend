@@ -63,6 +63,7 @@ const Login = () => {
             {
               ...formData,
             },
+            { withCredentials: true },
           )
           .then((res) => {
             toast.success("Login Success.", {
