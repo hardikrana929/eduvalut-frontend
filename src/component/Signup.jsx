@@ -47,16 +47,18 @@ const Signup = () => {
       });
       return;
     }
-    if (formData.password.length < 8) {
-      toast.error("Password must greater or equal 8 charecters.", {
-        duration: 3000,
-        position: "top-center",
-        style: {
-          border: "1px solid #713200",
-          padding: "10px",
-          color: "#713200",
+    if (
+      formData.password.length < 8 ||
+      !/[A-Z]/.test(formData.password) ||
+      !/[0-9]/.test(formData.password)
+    ) {
+      toast.error(
+        "Password must be at least 8 characters and contain one uppercase letter and one number.",
+        {
+          duration: 4000,
+          position: "top-center",
         },
-      });
+      );
       return;
     }
     try {
@@ -84,15 +86,21 @@ const Signup = () => {
         password: "",
       });
     } catch (err) {
-      toast.error(err.response?.data?.message || "Oops! Server Error...", {
-        duration: 3000,
-        position: "top-center",
-        style: {
-          border: "1px solid #713200",
-          padding: "10px",
-          color: "#713200",
-        },
-      });
+      console.error("Signup Error:", err.response?.data || err);
+
+      const data = err.response?.data;
+
+      if (data?.errors?.length > 0) {
+        toast.error(data.errors[0].msg || "Invalid input.", {
+          duration: 4000,
+          position: "top-center",
+        });
+      } else {
+        toast.error(data?.message || "Oops! Server Error...", {
+          duration: 3000,
+          position: "top-center",
+        });
+      }
     } finally {
       setIsLoading(false);
     }
