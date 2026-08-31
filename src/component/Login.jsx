@@ -57,39 +57,59 @@ const Login = () => {
           },
         });
       } else {
-        await axios
-          .post(
-            "https://eduvalut-backend.vercel.app/api/student/login-student",
-            {
-              ...formData,
-            },
-            { withCredentials: true },
-          )
-          .then((res) => {
-            toast.success("Login Success.", {
-              duration: 3000,
-              position: "top-center",
-              style: {
-                border: "1px solid #713200",
-                padding: "16px",
-                color: "#713200",
-              },
-            });
+        //   await axios
+        //     .post(
+        //       "https://eduvalut-backend.vercel.app/api/student/login-student",
+        //       {
+        //         ...formData,
+        //       },
+        //       { withCredentials: true },
+        //     )
+        //     .then((res) => {
+        //       toast.success("Login Success.", {
+        //         duration: 3000,
+        //         position: "top-center",
+        //         style: {
+        //           border: "1px solid #713200",
+        //           padding: "16px",
+        //           color: "#713200",
+        //         },
+        //       });
 
-            // AFTER — cookie is set automatically by backend; store only user info for display
-            localStorage.setItem("user", JSON.stringify(res.data.user));
+        //       // AFTER — cookie is set automatically by backend; store only user info for display
+        //       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-            if (res.data.user.role === "student") {
-              navigate("/stdDash", { replace: true });
-            } else {
-              navigate("/adminDash", { replace: true });
-            }
+        //       if (res.data.user.role === "student") {
+        //         navigate("/stdDash", { replace: true });
+        //       } else {
+        //         navigate("/adminDash", { replace: true });
+        //       }
 
-            setFormData({
-              email: "",
-              password: "",
-            });
-          });
+        //       setFormData({
+        //         email: "",
+        //         password: "",
+        //       });
+        //     });
+        const res = await axios.post(
+          "https://eduvalut-backend.vercel.app/api/student/login-student",
+          formData,
+          {
+            withCredentials: true,
+          },
+        );
+
+        toast.success("Login Success.", {
+          duration: 3000,
+          position: "top-center",
+        });
+
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+
+        if (res.data.user.role === "student") {
+          navigate("/stdDash", { replace: true });
+        } else if (res.data.user.role === "admin") {
+          navigate("/adminDash", { replace: true });
+        }
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "Opps! Server Error...", {
